@@ -551,9 +551,9 @@ if ('PerformanceObserver' in window) {
 
 function initScrollToTop() {
     const scrollToTopBtn = document.getElementById('scrollToTop');
-    
+
     if (!scrollToTopBtn) return;
-    
+
     // Show/hide button based on scroll position
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
@@ -562,7 +562,7 @@ function initScrollToTop() {
             scrollToTopBtn.classList.remove('visible');
         }
     });
-    
+
     // Scroll to top on click
     scrollToTopBtn.addEventListener('click', () => {
         window.scrollTo({
@@ -578,15 +578,15 @@ function initScrollToTop() {
 
 function initResumeDownload() {
     const downloadBtn = document.getElementById('downloadResume');
-    
+
     if (!downloadBtn) return;
-    
+
     downloadBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        
+
         // Show notification
         showNotification('Resume download will be available soon!', 'info');
-        
+
         // TODO: Replace with actual resume file path
         // window.open('assets/resume/Kamalaprasad_Natarajan_Resume.pdf', '_blank');
     });
@@ -600,22 +600,23 @@ function showNotification(message, type = 'success') {
     // Remove existing notifications
     const existing = document.querySelector('.notification');
     if (existing) existing.remove();
-    
+
     // Create notification element
     const notification = document.createElement('div');
-    notification.className = \
-otification notification-\\;
-    notification.innerHTML = \
-        <i class=\"fas fa-\\"></i>
-        <span>\</span>
-    \;
-    
+    notification.className = `notification notification-${type}`;
+    const icon = type === 'success' ? 'check-circle' : 'info-circle';
+    notification.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span>${message}</span>
+    `;
+
     // Add styles
-    notification.style.cssText = \
+    const bgColor = type === 'success' ? 'linear-gradient(135deg, #10B981, #059669)' : 'linear-gradient(135deg, #3B82F6, #1D4ED8)';
+    notification.style.cssText = `
         position: fixed;
         top: 100px;
         right: 20px;
-        background: \;
+        background: ${bgColor};
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 0.5rem;
@@ -625,10 +626,10 @@ otification notification-\\;
         gap: 0.75rem;
         z-index: 10000;
         animation: slideInRight 0.3s ease;
-    \;
-    
+    `;
+
     document.body.appendChild(notification);
-    
+
     // Auto remove after 3 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.3s ease';
@@ -642,7 +643,7 @@ otification notification-\\;
 
 function initLazyLoading() {
     const images = document.querySelectorAll('img[loading="lazy"]');
-    
+
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -653,7 +654,7 @@ function initLazyLoading() {
                 }
             });
         });
-        
+
         images.forEach(img => imageObserver.observe(img));
     } else {
         // Fallback for browsers without IntersectionObserver
