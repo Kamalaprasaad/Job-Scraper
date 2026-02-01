@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Kamalaprasad Natarajan - RPA Support Engineer & DevOps Professional specializing in automation, cloud technologies, and intelligent process automation.">
+    <meta name="keywords" content="RPA, DevOps, Automation, UiPath, Power Automate, AWS, Azure, Pega">
+    <meta name="author" content="Kamalaprasad Natarajan">
+
+    <title>Kamalaprasad Natarajan | RPA & DevOps Engineer</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">KN</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-greeting">👋 Hey there!</div>
+                <h1 class="hero-title">I'm Kamalaprasad Natarajan</h1>
+                <p class="hero-subtitle">
+                    <span class="highlight">Quality Automation Engineer</span> & DevOps Professional
+                </p>
+                <p class="hero-description">
+                    Site Reliability Engineer (SRE) and DevOps Engineer with 5+ years of experience designing,
+                    automating,
+                    and maintaining cloud-native infrastructure across Azure and AWS. Passionate about building reliable
+                    systems that leverage automation to drive operational excellence.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                    <a href="https://www.linkedin.com/in/kamalaprasadnatarajan/" target="_blank"
+                        class="btn btn-secondary">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <img src="assets/images/profile-photo.jpg" alt="Kamalaprasad Natarajan">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-description">
+                    A results-driven professional with expertise in automation, cloud technologies, and DevOps practices
+                </p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Professional Background</h3>
+                    <p>
+                        Currently serving as a <strong>Quality Automation Engineer</strong> at Centene Health Care
+                        Corporation,
+                        where I design and orchestrate cross-platform automation workflows using UiPath, PEGA, and
+                        Python integrated
+                        with Splunk and Dynatrace to enhance system reliability by 25%.
+                    </p>
+                    <p>
+                        With a strong foundation in automation technologies and cloud platforms, I've successfully
+                        reduced
+                        deployment time by up to 50%, improved system uptime, and implemented scalable automation across
+                        hybrid
+                        cloud environments through innovative DevOps practices and infrastructure-as-code.
+                    </p>
+                    <p>
+                        My technical expertise spans across automation frameworks (UiPath, PEGA, Power Automate), cloud
+                        platforms
+                        (Azure, AWS), programming languages (C#, Java, Python, React, TypeScript), and DevOps tools
+                        (Docker, Kubernetes, Terraform, GitLab, Jenkins).
+                    </p>
+
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">7+</div>
+                            <div class="stat-label">Certifications</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3.9</div>
+                            <div class="stat-label">Master's GPA</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">7.5</div>
+                            <div class="stat-label">IELTS Score</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-education">
+                    <h3>Education</h3>
+                    <ul class="education-list">
+                        <li class="education-item">
+                            <div class="education-degree">Master of Information Systems</div>
+                            <div class="education-school">Cleveland State University</div>
+                            <div class="education-date">August 2022 - December 2023</div>
+                            <div class="education-gpa">GPA: 3.9 / 4.0</div>
+                        </li>
+                        <li class="education-item">
+                            <div class="education-degree">Bachelor of Engineering - Computer Information Systems</div>
+                            <div class="education-school">Anna University</div>
+                            <div class="education-date">April 2016 - July 2020</div>
+                        </li>
+                    </ul>
+
+                    <h3 style="margin-top: 2rem;">Languages & Certifications</h3>
+                    <ul class="education-list">
+                        <li class="education-item">
+                            <div class="education-degree">IELTS Academic</div>
+                            <div class="education-school">Overall Band Score: 7.5 (C1 Level)</div>
+                            <div class="education-date">February 2022</div>
+                            <div style="margin-top: 0.5rem; color: var(--color-text-secondary);">
+                                Listening: 9.0 | Reading: 7.0 | Writing: 6.5 | Speaking: 7.0
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-description">
+                    A comprehensive toolkit for building modern automation and cloud solutions
+                </p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-category-icon">💻</div>
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Groovy</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">RESTful APIs</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Power Shell</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">.Net</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-icon">🤖</div>
+                    <h3>Automation Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">UiPath</span>
+                        <span class="skill-tag">Power Automate</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Power Apps</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Excel Macro</span>
+                        <span class="skill-tag">Ansible Tower</span>
+                        <span class="skill-tag">PEGA Robotics</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-icon">☁️</div>
+                    <h3>Cloud & DevOps</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Azure Stack</span>
+                        <span class="skill-tag">AWS Stack</span>
+                        <span class="skill-tag">Dynatrace</span>
+                        <span class="skill-tag">Grafana</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">GitLab</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Team City</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-icon">🗄️</div>
+                    <h3>Database Management</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MS Access</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Oracle</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MS-Access</span>
+                        <span class="skill-tag">Salesforce</span>
+                        <span class="skill-tag">JIRA</span>
+                        <span class="skill-tag">Rally</span>
+                        <span class="skill-tag">Dataverse</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-icon">🌐</div>
+                    <h3>Web Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JSON</span>
+                        <span class="skill-tag">jQuery</span>
+                        <span class="skill-tag">Bootstrap</span>
+                        <span class="skill-tag">Redux</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Swift</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-icon">🖥️</div>
+                    <h3>Operating Systems</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Windows</span>
+                        <span class="skill-tag">Unix</span>
+                        <span class="skill-tag">Ubuntu</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications" id="certifications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certifications</h2>
+                <p class="section-description">
+                    Industry-recognized certifications demonstrating expertise across automation and cloud platforms
+                </p>
+            </div>
+
+            <div class="certifications-grid">
+                <div class="cert-card">
+                    <img src="assets/images/cert-ms-degree.jpg" alt="Master's Degree Certificate" class="cert-image">
+                    <div class="cert-content">
+                        <h3 class="cert-title">Master of Information Systems</h3>
+                        <p class="cert-issuer">Cleveland State University</p>
+                        <p class="cert-date">December 2023</p>
+                        <span class="cert-badge">Academic Degree</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <img src="assets/images/cert-uipath-ai.jpg" alt="UiPath AI Certification" class="cert-image">
+                    <div class="cert-content">
+                        <h3 class="cert-title">UiPath Certified Professional Specialized AI</h3>
+                        <p class="cert-issuer">UiPath</p>
+                        <p class="cert-date">July 2025</p>
+                        <span class="cert-badge">Valid: 2024-2026</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <img src="assets/images/cert-pega.jpg" alt="Pega Certification" class="cert-image">
+                    <div class="cert-content">
+                        <h3 class="cert-title">Certified Pega Robotics System Architect</h3>
+                        <p class="cert-issuer">Pega Academy</p>
+                        <p class="cert-date">September 2024</p>
+                        <span class="cert-badge">Valid: 2024-2026</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <img src="assets/images/cert-automation-anywhere.jpg" alt="Automation Anywhere Certification"
+                        class="cert-image">
+                    <div class="cert-content">
+                        <h3 class="cert-title">Certified Advanced Automation Professional</h3>
+                        <p class="cert-issuer">Automation Anywhere</p>
+                        <p class="cert-date">August 2024</p>
+                        <span class="cert-badge">Valid: 2024-2026</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <img src="assets/images/cert-uipath-dev.jpg" alt="UiPath Developer Certification"
+                        class="cert-image">
+                    <div class="cert-content">
+                        <h3 class="cert-title">UiPath Certified Professional Automation Developer</h3>
+                        <p class="cert-issuer">UiPath</p>
+                        <p class="cert-date">August 2024</p>
+                        <span class="cert-badge">Valid: 2024-2026</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <img src="assets/images/cert-aws.jpg" alt="AWS Certification" class="cert-image">
+                    <div class="cert-content">
+                        <h3 class="cert-title">AWS Certified Cloud Practitioner</h3>
+                        <p class="cert-issuer">Amazon Web Services</p>
+                        <p class="cert-date">January 2024</p>
+                        <span class="cert-badge">Valid: 2024-2027</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <img src="assets/images/cert-microsoft-power.jpg" alt="Microsoft Power Platform Certification"
+                        class="cert-image">
+                    <div class="cert-content">
+                        <h3 class="cert-title">Microsoft Certified: Power Platform Fundamentals</h3>
+                        <p class="cert-issuer">Microsoft</p>
+                        <p class="cert-date">August 2024</p>
+                        <span class="cert-badge">Valid: 2024-2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Professional Experience</h2>
+                <p class="section-description">
+                    Building innovative automation solutions and driving operational excellence
+                </p>
+            </div>
+
+            <div class="experience-timeline">
+                <!-- Current Role -->
+                <div class="experience-item">
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-role">Quality Automation Engineer</h3>
+                                <p class="experience-company">Centene Health Care Corporation | Alpharetta, GA</p>
+                            </div>
+                            <span class="experience-date">September 2024 - Present</span>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Designed and orchestrated cross-platform automation workflows using UiPath, PEGA, and
+                                Python integrated with Splunk and Dynatrace to enhance system reliability by 25%</li>
+                            <li>Engineered scalable automation frameworks in C#, UiPath, and PEGA to support UI/API
+                                regression pipelines for healthcare claim processing, reducing manual QA effort by 40%
+                            </li>
+                            <li>Automated CI/CD regression testing through GitHub Actions, GitLab, and Azure/AWS
+                                pipelines using parameterized Python and PowerShell scripts</li>
+                            <li>Built and optimized RESTful API validation frameworks using Python, PowerShell, Postman,
+                                and SOAP UI, integrated with CI/CD pipelines for continuous backend validation and
+                                monitoring</li>
+                            <li>Developed SQL, Oracle, and PostgreSQL queries for data validation and data integrity,
+                                improving automation accuracy and audit traceability by 30%</li>
+                            <li>Partnered with Salesforce engineering teams to automate care coordination workflows
+                                using Apex, SOQL, and hybrid Salesforce–RPA pipelines</li>
+                            <li>Collaborated with observability, QA, and infrastructure teams to automate defect
+                                monitoring via Dynatrace and Splunk, reducing defect leakage by 25%</li>
+                            <li>Applied Agentic AI automation using Python, Bash, and PowerShell scripting to automate
+                                cloud-native deployments and configuration management on AWS and Azure</li>
+                        </ul>
+                        <div class="experience-skills">
+                            <span class="experience-skill">UiPath</span>
+                            <span class="experience-skill">PEGA</span>
+                            <span class="experience-skill">Python</span>
+                            <span class="experience-skill">C#</span>
+                            <span class="experience-skill">Splunk</span>
+                            <span class="experience-skill">Dynatrace</span>
+                            <span class="experience-skill">GitHub Actions</span>
+                            <span class="experience-skill">GitLab</span>
+                            <span class="experience-skill">Azure</span>
+                            <span class="experience-skill">AWS</span>
+                            <span class="experience-skill">Salesforce</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cantaloupe Inc -->
+                <div class="experience-item">
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-role">DevOps Engineer</h3>
+                                <p class="experience-company">Cantaloupe Inc</p>
+                            </div>
+                            <span class="experience-date">April 2024 - August 2024</span>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Designed and implemented Power Automate workflows for IT incident and change management
+                            </li>
+                            <li>Enhanced security measures by implementing Infrastructure as Code with Terraform and
+                                Ansible to manage and configure environments</li>
+                            <li>Automated deployment processes using Jenkins and Docker, enhancing compatibility with
+                                Power BI reporting tools</li>
+                            <li>Created a POC using Power BI for cost analysis by integrating Salesforce and Dataverse
+                                data into Excel, enhancing financial reporting accuracy</li>
+                        </ul>
+                        <div class="experience-skills">
+                            <span class="experience-skill">Power Automate</span>
+                            <span class="experience-skill">Terraform</span>
+                            <span class="experience-skill">Ansible</span>
+                            <span class="experience-skill">Jenkins</span>
+                            <span class="experience-skill">Docker</span>
+                            <span class="experience-skill">Power BI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Farmers Insurance -->
+                <div class="experience-item">
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-role">Software Engineer</h3>
+                                <p class="experience-company">Farmers Insurance Group</p>
+                            </div>
+                            <span class="experience-date">May 2023 - February 2024</span>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Spearheaded the automation of SSIS package deployment by collaborating with cross
+                                functional teams to design and combine SQL queries and PowerShell scripts</li>
+                            <li>Enhanced front-end user interfaces with RESTful APIs using C#, Java, JavaScript, React,
+                                Git-Hub, Sonar-Qube, Vera-Code, J-Frog and PowerShell, resulting in a 30% reduction in
+                                resource allocation costs</li>
+                            <li>Enhanced system reliability by 10% through automated testing and monitoring</li>
+                            <li>Developed a POC for synthetic monitoring of the Agent Web Page using Power Apps,
+                                automating login, monitoring, and report verification processes</li>
+                            <li>Enhanced data visualization processes with Power BI, improving analytics turnaround by
+                                30%</li>
+                        </ul>
+                        <div class="experience-skills">
+                            <span class="experience-skill">SSIS</span>
+                            <span class="experience-skill">PowerShell</span>
+                            <span class="experience-skill">C#</span>
+                            <span class="experience-skill">Java</span>
+                            <span class="experience-skill">JavaScript</span>
+                            <span class="experience-skill">React</span>
+                            <span class="experience-skill">Power Apps</span>
+                            <span class="experience-skill">Power BI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TCS -->
+                <div class="experience-item">
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-role">Assistant Systems Engineer</h3>
+                                <p class="experience-company">Tata Consultancy Services Limited</p>
+                            </div>
+                            <span class="experience-date">January 2021 - August 2022</span>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Worked with Clients: Rabo-Bank and MetLife Insurance developing and deploying
+                                cloud-native applications using Azure DevOps, Kubernetes, Ansible, and to integrate
+                                Power Platform tools into their Azure Cloud</li>
+                            <li>Provided On-Call Support for Deployments into Azure Gateway and Production server for
+                                Rabo Bank and MetLife Insurance</li>
+                            <li>Led the Swift Payment Gateway migration, automating virtual server installations and
+                                setting up the payment gateway on Azure Micro Services Cloud</li>
+                            <li>Improved application deployment efficiency by 15% through automated testing and
+                                deployment pipelines using SQL, Docker, Kubernetes, and Ansible</li>
+                            <li>Accelerated time-to-market through enhanced security measures and A/B testing</li>
+                        </ul>
+                        <div class="experience-skills">
+                            <span class="experience-skill">Azure DevOps</span>
+                            <span class="experience-skill">Kubernetes</span>
+                            <span class="experience-skill">Ansible</span>
+                            <span class="experience-skill">Docker</span>
+                            <span class="experience-skill">SQL</span>
+                            <span class="experience-skill">Power Platform</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-description">
+                    Let's connect and discuss how we can work together
+                </p>
+            </div>
+
+            <div class="contact-content">
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                    I'm always open to discussing new opportunities, collaborations, or just having a chat about
+                    automation and technology. Feel free to reach out through any of the platforms below!
+                </p>
+
+                <div class="contact-links">
+                    <a href="mailto:kamalaprasadnatarajan3@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        Email Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/kamalaprasadnatarajan/" target="_blank" class="contact-link">
+                        <i class="fab fa-linkedin contact-icon"></i>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/Kamalaprasaad" target="_blank" class="contact-link">
+                        <i class="fab fa-github contact-icon"></i>
+                        GitHub
+                    </a>
+                    <a href="https://x.com/ShieldWolf98" target="_blank" class="contact-link">
+                        <i class="fab fa-x-twitter contact-icon"></i>
+                        Twitter/X
+                    </a>
+                    <a href="tel:+19734494216" class="contact-link">
+                        <i class="fas fa-phone contact-icon"></i>
+                        +1-973-449-4216
+                    </a>
+                </div>
+
+                <p style="margin-top: 2rem; color: var(--color-text-tertiary);">
+                    📍 Atlanta, GA | 838 Patriot Ln, Cedar Knolls, NJ 07927
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">
+                &copy; 2026 Kamalaprasad Natarajan. All rights reserved.
+            </p>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/kamalaprasadnatarajan/" target="_blank" class="footer-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/Kamalaprasaad" target="_blank" class="footer-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://x.com/ShieldWolf98" target="_blank" class="footer-link">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="mailto:kamalaprasadnatarajan3@gmail.com" class="footer-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p class="footer-text" style="font-size: 0.9rem; margin-top: 1rem;">
+                Built with 💜 using HTML, CSS, and JavaScript
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
