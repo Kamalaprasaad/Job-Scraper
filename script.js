@@ -573,12 +573,7 @@ function initResumeDownload() {
 
     downloadBtn.addEventListener('click', (e) => {
         e.preventDefault();
-
-        // Show notification
-        showNotification('Resume download will be available soon!', 'info');
-
-        // TODO: Replace with actual resume file path
-        // window.open('assets/resume/Kamalaprasad_Natarajan_Resume.pdf', '_blank');
+        window.open('https://www.linkedin.com/feed/update/urn:li:activity:7445219903982206976/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3B1Y3wTa%2BcSTaOpUiGUHD6fQ%3D%3D', '_blank');
     });
 }
 
