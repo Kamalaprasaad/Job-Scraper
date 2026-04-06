@@ -125,7 +125,7 @@ async function runScrape(source) {
   setScrapingState(true, source);
 
   const body = {
-    token,
+    token: getToken(),
     maxResults: getMaxResults(),
   };
 

@@ -1,9 +1,10 @@
 import fetch from 'node-fetch';
+import cheerio from 'cheerio';
 import { normalizeDiceJob } from './unified-schema.js';
 
 /**
- * Dice Jobs — Direct HTTP Scraper (No API key needed)
- * Uses Dice's public search API endpoint
+ * Dice Jobs — Direct HTML Scraper
+ * Scrapes Dice's public job pages, extracts data from RSC payload and HTML
  */
 export async function scrapeDice(token, searchQueries, onProgress) {
   const allJobs = [];
@@ -22,7 +23,7 @@ export async function scrapeDice(token, searchQueries, onProgress) {
       console.error(`Dice scrape error for "${q.query}":`, err.message);
     }
 
-    if (i < searchQueries.length - 1) await sleep(1500);
+    if (i < searchQueries.length - 1) await sleep(2000);
   }
 
   return allJobs;
@@ -30,71 +31,107 @@ export async function scrapeDice(token, searchQueries, onProgress) {
 
 async function fetchDiceJobs(query, location, maxResults) {
   const jobs = [];
-  const pageSize = Math.min(maxResults, 20);
+  const params = new URLSearchParams({
+    q: query,
+    pageSize: String(Math.min(maxResults, 20)),
+  });
 
-  // Dice has a public JSON API for search
-  for (let page = 1; jobs.length < maxResults; page++) {
-    const params = new URLSearchParams({
-      q: query,
-      countryCode2: 'US',
-      radius: '30',
-      radiusUnit: 'mi',
-      page: String(page),
-      pageSize: String(pageSize),
-      fields: 'id|jobId|summary|title|postedDate|modifiedDate|jobLocation.displayName|detailsPageUrl|salary|clientBrandId|companyPageUrl|companyName|employmentType|isRemote|guid',
-      culture: 'en',
-      recommendations: 'true',
-      interactionId: '0',
-      fj: 'true',
-      includeRemote: 'true',
+  if (location && location.toLowerCase() !== 'remote') {
+    params.set('location', location);
+  }
+  if (location?.toLowerCase() === 'remote') {
+    params.set('filters.isRemote', 'true');
+  }
+
+  const url = `https://www.dice.com/jobs?${params.toString()}`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+      },
     });
 
-    if (location && location.toLowerCase() !== 'remote') {
-      params.set('location', location);
+    if (!res.ok) {
+      console.log(`Dice returned ${res.status}`);
+      return jobs;
     }
 
-    const url = `https://job-search-api.svc.dhigroupinc.com/v1/dice/jobs/search?${params.toString()}`;
+    const html = await res.text();
 
-    try {
-      const res = await fetch(url, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-          'Accept': 'application/json',
-          'x-api-key': 'JHB7yGXyBnGkEzZ4Io9Tun22sGpjOaFV', // Dice's public client-side API key
-        },
-      });
-
-      if (!res.ok) {
-        console.log(`Dice API returned ${res.status} for page ${page}`);
-        break;
+    // Method 1: Extract from RSC (React Server Components) payload — contains structured job data
+    const rscScripts = html.match(/self\.__next_f\.push\(\[[\s\S]*?\]\)/g) || [];
+    for (const script of rscScripts) {
+      if (script.includes('jobList') && script.includes('"data"')) {
+        // Extract the jobList data from the RSC chunk
+        const jobListMatch = script.match(/"jobList":\{"data":\[([\s\S]*?)\],"meta"/);
+        if (jobListMatch) {
+          try {
+            // The data is double-escaped JSON in RSC format — parse carefully
+            const cleanJson = `[${jobListMatch[1]}]`
+              .replace(/\\\\/g, '\\')
+              .replace(/\\"/g, '"');
+            const jobItems = JSON.parse(cleanJson);
+            jobItems.forEach(job => {
+              jobs.push({
+                id: job.id || job.guid || `dice_${Date.now()}_${Math.random()}`,
+                title: job.title || '',
+                companyName: job.companyName || job.organizationName || '',
+                location: job.jobLocation?.displayName || '',
+                salary: job.salary || job.compensationSummary || null,
+                employmentType: job.employmentType || '',
+                jobUrl: job.detailsPageUrl
+                  ? `https://www.dice.com${job.detailsPageUrl}`
+                  : '',
+                postedDate: job.postedDate || null,
+                description: job.summary || '',
+              });
+            });
+          } catch (e) {
+            // RSC JSON parsing is tricky — fall through to HTML method
+          }
+        }
       }
-
-      const data = await res.json();
-      const results = data.data || [];
-
-      if (results.length === 0) break;
-
-      results.forEach(job => {
-        jobs.push({
-          id: job.id || job.guid,
-          title: job.title,
-          companyName: job.companyName,
-          location: job.jobLocation?.displayName || (job.isRemote ? 'Remote' : ''),
-          salary: job.salary || null,
-          employmentType: job.employmentType || '',
-          jobUrl: job.detailsPageUrl ? `https://www.dice.com${job.detailsPageUrl}` : '',
-          postedDate: job.postedDate,
-          description: job.summary || '',
-          isRemote: job.isRemote,
-        });
-      });
-
-      if (results.length < pageSize) break;
-      await sleep(800);
-    } catch (err) {
-      console.error(`Dice fetch error page ${page}:`, err.message);
-      break;
     }
+
+    // Method 2: Parse HTML for job detail links and their surrounding info
+    if (jobs.length === 0) {
+      const $ = cheerio.load(html);
+      
+      // Dice uses a[href*="/job-detail/"] for job cards
+      $('a[href*="/job-detail/"]').each((_, el) => {
+        const link = $(el);
+        const href = link.attr('href') || '';
+        const title = link.text().trim();
+        
+        // Get the parent card container
+        const card = link.closest('[role="article"], [data-testid], .job-card') || link.parent().parent();
+        
+        // Try to extract company and location from nearby elements
+        const cardText = card.text();
+        const company = card.find('[data-cy="search-result-company-name"], [data-testid*="company"]').text().trim();
+        const loc = card.find('[data-cy="search-result-location"], [data-testid*="location"]').text().trim();
+
+        // Avoid duplicate links
+        if (title && title.length > 3 && !jobs.some(j => j.jobUrl === `https://www.dice.com${href}`)) {
+          jobs.push({
+            id: href.split('/').pop() || `dice_${Date.now()}_${Math.random().toString(36).slice(2)}`,
+            title: title,
+            companyName: company,
+            location: loc,
+            salary: null,
+            employmentType: '',
+            jobUrl: href.startsWith('http') ? href : `https://www.dice.com${href}`,
+            postedDate: null,
+            description: '',
+          });
+        }
+      });
+    }
+  } catch (err) {
+    console.error(`Dice fetch error:`, err.message);
   }
 
   return jobs.slice(0, maxResults);
