@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Multi-source job scraper dashboard — Find C2C positions across LinkedIn, Indeed, and Dice">
-  <title>Job Scraper Dashboard — Kamalaprasad Natarajan</title>
+  <title>JobScraper.com — Find C2C Jobs Across LinkedIn, Indeed & Dice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -28,8 +28,8 @@
           </svg>
         </div>
         <div>
-          <h1>Job Scraper Dashboard</h1>
-          <p class="subtitle">LinkedIn · Indeed · Dice — Powered by Apify</p>
+          <h1>JobScraper.com</h1>
+          <p class="subtitle">LinkedIn · Indeed · Dice — Free Direct Scraping</p>
         </div>
       </div>
       <div class="header-actions">
@@ -50,12 +50,8 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="apify-token">Apify API Token</label>
-          <p class="form-help">Get your free token at <a href="https://console.apify.com/account/integrations" target="_blank">console.apify.com</a></p>
-          <div class="input-group">
-            <input type="password" id="apify-token" placeholder="apify_api_xxxxxxxxxxxx" autocomplete="off">
-            <button id="btn-toggle-token" class="btn btn-ghost btn-sm" title="Show/hide">👁</button>
-          </div>
+          <label>🎉 No API Key Needed!</label>
+          <p class="form-help">JobScraper.com uses direct HTTP scraping — completely free, no accounts or tokens required.</p>
         </div>
         <div class="form-group">
           <label for="max-results">Max Results per Query</label>
@@ -113,7 +109,7 @@
             <div class="source-icon linkedin-icon">in</div>
             <div>
               <h3>LinkedIn</h3>
-              <p class="source-actor">worldunboxer/rapid-linkedin-scraper</p>
+              <p class="source-actor">Free · Direct HTTP Scraper</p>
             </div>
           </div>
           <div class="source-stats">
@@ -128,7 +124,7 @@
             <div class="source-icon indeed-icon">I</div>
             <div>
               <h3>Indeed</h3>
-              <p class="source-actor">valig/indeed-jobs-scraper</p>
+              <p class="source-actor">Free · Direct HTTP Scraper</p>
             </div>
           </div>
           <div class="source-stats">
@@ -143,7 +139,7 @@
             <div class="source-icon dice-icon">D</div>
             <div>
               <h3>Dice</h3>
-              <p class="source-actor">worldunboxer/dice-jobs-scraper</p>
+              <p class="source-actor">Free · Dice Public API</p>
             </div>
           </div>
           <div class="source-stats">
@@ -207,7 +203,7 @@
             </svg>
           </div>
           <h3>No jobs scraped yet</h3>
-          <p>Configure your Apify token in Settings, then click <strong>"Run All Scrapers"</strong> to start searching.</p>
+          <p>Click <strong>"Run All Scrapers"</strong> to start searching — no API key needed!</p>
         </div>
         <table id="results-table" class="hidden">
           <thead>
@@ -230,7 +226,7 @@
 
   <!-- ═══ Footer ═══ -->
   <footer>
-    <p>Built for <strong>Kamalaprasad Natarajan</strong> — H1B C2C Job Search Tool · Powered by <a href="https://apify.com" target="_blank">Apify</a></p>
+    <p>Built for <strong>Kamalaprasad Natarajan</strong> — H1B C2C Job Search Tool · <strong>JobScraper.com</strong></p>
   </footer>
 
   <script src="app.js"></script>

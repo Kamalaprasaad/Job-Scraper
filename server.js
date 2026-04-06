@@ -7,6 +7,8 @@ import { scrapeLinkedIn } from './scrapers/linkedin.js';
 import { scrapeIndeed } from './scrapers/indeed.js';
 import { scrapeDice } from './scrapers/dice.js';
 
+// NOTE: No API key needed! All scrapers use direct HTTP requests.
+
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -83,13 +85,9 @@ app.get('/api/status', (req, res) => {
 // ─── API: Scrape from a single source ────────────────────────────
 app.post('/api/scrape/:source', async (req, res) => {
   const { source } = req.params;
-  const token = req.body.token || process.env.APIFY_API_TOKEN;
+  const token = req.body.token || 'direct'; // Token not needed for direct scraping
   const queries = req.body.queries || DEFAULT_QUERIES.slice(0, 3); // limit for single source
   const maxResults = req.body.maxResults || 15;
-
-  if (!token) {
-    return res.status(400).json({ error: 'Apify API token is required. Set it in the dashboard settings or .env file.' });
-  }
 
   const queriesWithMax = queries.map(q => ({ ...q, maxResults }));
   const onProgress = createProgressTracker();
@@ -130,13 +128,9 @@ app.post('/api/scrape/:source', async (req, res) => {
 
 // ─── API: Scrape from ALL sources ────────────────────────────────
 app.post('/api/scrape/all', async (req, res) => {
-  const token = req.body.token || process.env.APIFY_API_TOKEN;
+  const token = req.body.token || 'direct'; // Token not needed for direct scraping
   const queries = req.body.queries || DEFAULT_QUERIES;
   const maxResults = req.body.maxResults || 10;
-
-  if (!token) {
-    return res.status(400).json({ error: 'Apify API token is required.' });
-  }
 
   const queriesWithMax = queries.map(q => ({ ...q, maxResults }));
   const onProgress = createProgressTracker();

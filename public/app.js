@@ -33,10 +33,6 @@ function bindEvents() {
   $('#btn-settings').addEventListener('click', () => toggleModal('settings-modal'));
   $('#btn-close-settings').addEventListener('click', () => toggleModal('settings-modal'));
   $('#btn-save-settings').addEventListener('click', saveSettings);
-  $('#btn-toggle-token').addEventListener('click', () => {
-    const input = $('#apify-token');
-    input.type = input.type === 'password' ? 'text' : 'password';
-  });
 
   // Scraper buttons
   $('#btn-scrape-all').addEventListener('click', () => runScrape('all'));
@@ -83,23 +79,19 @@ function bindEvents() {
 
 // ─── Settings ────────────────────────────────────────────────
 function loadSettings() {
-  const token = localStorage.getItem('apify_token') || '';
   const maxResults = localStorage.getItem('max_results') || '15';
-  $('#apify-token').value = token;
   $('#max-results').value = maxResults;
 }
 
 function saveSettings() {
-  const token = $('#apify-token').value.trim();
   const maxResults = $('#max-results').value;
-  localStorage.setItem('apify_token', token);
   localStorage.setItem('max_results', maxResults);
   toggleModal('settings-modal');
   showToast('Settings saved!');
 }
 
 function getToken() {
-  return localStorage.getItem('apify_token') || '';
+  return 'direct'; // No token needed for direct scraping
 }
 
 function getMaxResults() {
@@ -129,14 +121,7 @@ function renderQueries(queries) {
 
 // ─── Run Scrape ──────────────────────────────────────────────
 async function runScrape(source) {
-  const token = getToken();
-  if (!token) {
-    toggleModal('settings-modal');
-    showToast('Please set your Apify API token first!', 'error');
-    return;
-  }
-
-  // Disable buttons
+  // No token needed for direct scraping
   setScrapingState(true, source);
 
   const body = {
