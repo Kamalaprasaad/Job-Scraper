@@ -1,0 +1,19 @@
+{
+  "name": "job-scraper-dashboard",
+  "version": "1.0.0",
+  "description": "Multi-source job scraper dashboard using Apify APIs for LinkedIn, Indeed, and Dice",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "apify-client": "^2.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "author": "Kamalaprasad Natarajan",
+  "license": "MIT"
+}

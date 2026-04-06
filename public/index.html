@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Multi-source job scraper dashboard — Find C2C positions across LinkedIn, Indeed, and Dice">
+  <title>Job Scraper Dashboard — Kamalaprasad Natarajan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!-- ═══ Animated Background ═══ -->
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
+
+  <!-- ═══ Header ═══ -->
+  <header id="main-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+            <path d="M8 22L16 10L24 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="16" r="3" fill="white"/>
+            <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div>
+          <h1>Job Scraper Dashboard</h1>
+          <p class="subtitle">LinkedIn · Indeed · Dice — Powered by Apify</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span id="job-count-badge" class="badge">0 Jobs</span>
+        <button id="btn-settings" class="btn btn-ghost" title="Settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ Settings Modal ═══ -->
+  <div id="settings-modal" class="modal-overlay hidden">
+    <div class="modal glass-card">
+      <div class="modal-header">
+        <h2>⚙️ Settings</h2>
+        <button id="btn-close-settings" class="btn btn-ghost btn-sm">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="apify-token">Apify API Token</label>
+          <p class="form-help">Get your free token at <a href="https://console.apify.com/account/integrations" target="_blank">console.apify.com</a></p>
+          <div class="input-group">
+            <input type="password" id="apify-token" placeholder="apify_api_xxxxxxxxxxxx" autocomplete="off">
+            <button id="btn-toggle-token" class="btn btn-ghost btn-sm" title="Show/hide">👁</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="max-results">Max Results per Query</label>
+          <input type="number" id="max-results" value="15" min="5" max="100">
+        </div>
+        <button id="btn-save-settings" class="btn btn-primary">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Job Detail Modal ═══ -->
+  <div id="job-modal" class="modal-overlay hidden">
+    <div class="modal modal-lg glass-card">
+      <div class="modal-header">
+        <h2 id="modal-job-title">Job Title</h2>
+        <button id="btn-close-job" class="btn btn-ghost btn-sm">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="job-detail-meta">
+          <span class="detail-chip" id="modal-job-company">Company</span>
+          <span class="detail-chip" id="modal-job-location">Location</span>
+          <span class="detail-chip source-chip" id="modal-job-source">Source</span>
+          <span class="detail-chip" id="modal-job-salary">Salary</span>
+          <span class="detail-chip" id="modal-job-type">Type</span>
+        </div>
+        <div id="modal-job-description" class="job-description-content"></div>
+        <div class="modal-actions">
+          <a id="modal-apply-link" href="#" target="_blank" class="btn btn-primary btn-lg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Apply Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Main Content ═══ -->
+  <main id="main-content">
+    <!-- ─── Control Panel ─── -->
+    <section id="control-panel" class="glass-card">
+      <div class="panel-header">
+        <h2>🔍 Scraper Controls</h2>
+        <div class="panel-actions">
+          <button id="btn-scrape-all" class="btn btn-primary btn-glow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Run All Scrapers
+          </button>
+        </div>
+      </div>
+
+      <!-- Source Cards -->
+      <div class="source-cards">
+        <div class="source-card" data-source="linkedin">
+          <div class="source-header">
+            <div class="source-icon linkedin-icon">in</div>
+            <div>
+              <h3>LinkedIn</h3>
+              <p class="source-actor">worldunboxer/rapid-linkedin-scraper</p>
+            </div>
+          </div>
+          <div class="source-stats">
+            <span class="stat"><strong id="linkedin-count">0</strong> jobs</span>
+            <span class="stat status-dot" id="linkedin-status">Ready</span>
+          </div>
+          <button class="btn btn-outline btn-source" data-source="linkedin">Run LinkedIn</button>
+        </div>
+
+        <div class="source-card" data-source="indeed">
+          <div class="source-header">
+            <div class="source-icon indeed-icon">I</div>
+            <div>
+              <h3>Indeed</h3>
+              <p class="source-actor">valig/indeed-jobs-scraper</p>
+            </div>
+          </div>
+          <div class="source-stats">
+            <span class="stat"><strong id="indeed-count">0</strong> jobs</span>
+            <span class="stat status-dot" id="indeed-status">Ready</span>
+          </div>
+          <button class="btn btn-outline btn-source" data-source="indeed">Run Indeed</button>
+        </div>
+
+        <div class="source-card" data-source="dice">
+          <div class="source-header">
+            <div class="source-icon dice-icon">D</div>
+            <div>
+              <h3>Dice</h3>
+              <p class="source-actor">worldunboxer/dice-jobs-scraper</p>
+            </div>
+          </div>
+          <div class="source-stats">
+            <span class="stat"><strong id="dice-count">0</strong> jobs</span>
+            <span class="stat status-dot" id="dice-status">Ready</span>
+          </div>
+          <button class="btn btn-outline btn-source" data-source="dice">Run Dice</button>
+        </div>
+      </div>
+
+      <!-- Progress Log -->
+      <div id="progress-section" class="hidden">
+        <h3>📋 Live Progress</h3>
+        <div id="progress-log" class="progress-log"></div>
+      </div>
+    </section>
+
+    <!-- ─── Search Queries ─── -->
+    <section id="queries-panel" class="glass-card">
+      <div class="panel-header">
+        <h2>🎯 Search Queries</h2>
+        <button id="btn-toggle-queries" class="btn btn-ghost btn-sm">Show/Hide</button>
+      </div>
+      <div id="queries-list" class="queries-grid hidden"></div>
+    </section>
+
+    <!-- ─── Filters & Results ─── -->
+    <section id="results-section">
+      <!-- Filter Bar -->
+      <div id="filter-bar" class="glass-card filter-bar">
+        <div class="filter-group">
+          <input type="text" id="filter-search" placeholder="🔎  Search jobs by title, company, location..." class="filter-input">
+        </div>
+        <div class="filter-group filter-chips">
+          <button class="chip chip-active" data-filter-source="all">All Sources</button>
+          <button class="chip" data-filter-source="LinkedIn">LinkedIn</button>
+          <button class="chip" data-filter-source="Indeed">Indeed</button>
+          <button class="chip" data-filter-source="Dice">Dice</button>
+        </div>
+        <div class="filter-group">
+          <select id="filter-sort" class="filter-select">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="title">Title A-Z</option>
+            <option value="company">Company A-Z</option>
+          </select>
+          <div class="export-buttons">
+            <button id="btn-export-csv" class="btn btn-ghost btn-sm" title="Export CSV">📄 CSV</button>
+            <button id="btn-export-json" class="btn btn-ghost btn-sm" title="Export JSON">📦 JSON</button>
+            <button id="btn-clear-jobs" class="btn btn-ghost btn-sm btn-danger" title="Clear All">🗑️ Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Table -->
+      <div class="glass-card results-container">
+        <div id="results-empty" class="empty-state">
+          <div class="empty-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+          <h3>No jobs scraped yet</h3>
+          <p>Configure your Apify token in Settings, then click <strong>"Run All Scrapers"</strong> to start searching.</p>
+        </div>
+        <table id="results-table" class="hidden">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Company</th>
+              <th>Location</th>
+              <th>Source</th>
+              <th>Salary</th>
+              <th>Posted</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="results-body"></tbody>
+        </table>
+        <div id="results-pagination" class="pagination hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ Footer ═══ -->
+  <footer>
+    <p>Built for <strong>Kamalaprasad Natarajan</strong> — H1B C2C Job Search Tool · Powered by <a href="https://apify.com" target="_blank">Apify</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
