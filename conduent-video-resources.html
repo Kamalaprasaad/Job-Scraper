@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conduent Interview Video Brush-Up</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #20242c;
+      --muted: #606b7a;
+      --line: #d8dee8;
+      --teal: #0f766e;
+      --blue: #365d8c;
+      --green: #2f6f4e;
+      --red: #a74444;
+      --gold: #a66a16;
+      --shadow: 0 14px 38px rgba(22, 32, 48, 0.10);
+      --radius: 8px;
+      --mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 20px 56px;
+    }
+
+    .hero,
+    .nav,
+    .video-card,
+    .watch-plan,
+    .summary-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      gap: 18px;
+      min-height: 300px;
+      padding: 30px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 820px;
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 850;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-copy {
+      max-width: 750px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .button-row,
+    .nav,
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .button-row {
+      margin-top: 24px;
+    }
+
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 780;
+      padding: 10px 14px;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .button:hover,
+    .button:focus {
+      border-color: var(--teal);
+      outline: none;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-stat {
+      border-left: 4px solid var(--teal);
+      padding: 10px 0 10px 12px;
+      background: #fbfcfe;
+      border-radius: 6px;
+    }
+
+    .mini-stat:nth-child(2) {
+      border-color: var(--blue);
+    }
+
+    .mini-stat:nth-child(3) {
+      border-color: var(--gold);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 1.25rem;
+      line-height: 1.15;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 18px 0;
+      padding: 10px;
+      background: rgba(245, 247, 251, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav a {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 6px;
+      padding: 7px 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 720;
+    }
+
+    .nav a:hover,
+    .nav a:focus {
+      background: #e8eef7;
+      color: var(--ink);
+      outline: none;
+    }
+
+    section {
+      scroll-margin-top: 84px;
+      margin-top: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .video-card,
+    .watch-plan,
+    .summary-card {
+      padding: 22px;
+    }
+
+    .video-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .video-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .duration {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #f7fafc;
+      padding: 5px 9px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .pill {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--muted);
+      font-size: 0.79rem;
+      font-weight: 760;
+      background: #fff;
+    }
+
+    .why {
+      border-left: 4px solid var(--blue);
+      background: #f5f8fc;
+      border-radius: 6px;
+      padding: 12px;
+      color: #253348;
+    }
+
+    .say {
+      border-left: 4px solid var(--green);
+      background: #f3faf6;
+      border-radius: 6px;
+      padding: 12px;
+      color: #20312a;
+      font-weight: 720;
+    }
+
+    .note {
+      border-left: 4px solid var(--gold);
+      background: #fffaf0;
+      border-radius: 6px;
+      padding: 12px;
+      color: #403322;
+    }
+
+    .danger {
+      border-left: 4px solid var(--red);
+      background: #fff6f6;
+      border-radius: 6px;
+      padding: 12px;
+      color: #403030;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    code {
+      font-family: var(--mono);
+      background: #eef2f7;
+      border: 1px solid #dde4ee;
+      border-radius: 4px;
+      padding: 1px 5px;
+      white-space: nowrap;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        padding: 18px 12px 42px;
+      }
+
+      h1 {
+        font-size: 2.15rem;
+      }
+
+      .nav {
+        position: static;
+      }
+
+      .button,
+      .nav a {
+        width: 100%;
+      }
+
+      .video-top {
+        flex-direction: column;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .nav,
+      .button-row {
+        display: none;
+      }
+
+      .hero,
+      .video-card,
+      .watch-plan,
+      .summary-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Video brush-up page</div>
+        <h1>Short videos to refresh the Conduent onsite topics</h1>
+        <p class="hero-copy">
+          Watch these in focused blocks. Do not try to become a Kubernetes architect overnight;
+          use the videos to make your answers sharper, cleaner, and easier to explain under pressure.
+        </p>
+        <div class="button-row">
+          <a class="button primary" href="#fast-track">Start Fast Track</a>
+          <a class="button" href="conduent-interview-prep.html">Main Prep</a>
+          <a class="button" href="conduent-previous-questions.html">Previous Questions</a>
+          <a class="button" href="conduent-python-sql-practice.html">Python/SQL</a>
+          <a class="button" href="conduent-ai-study-tools.html">AI Tools</a>
+          <button class="button" type="button" onclick="window.print()">Print Video List</button>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="Video page summary">
+        <div class="mini-stat">
+          <strong>10 quick links</strong>
+          <span>Kubernetes, Helm, SQL, Python, API, Tomcat, and AI/RAG</span>
+        </div>
+        <div class="mini-stat">
+          <strong>~35 minutes</strong>
+          <span>Enough to refresh before the onsite without getting lost</span>
+        </div>
+        <div class="mini-stat">
+          <strong>Say it back</strong>
+          <span>Each topic has one interview-ready line to practice</span>
+        </div>
+      </aside>
+    </header>
+
+    <nav class="nav" aria-label="Video categories">
+      <a href="#fast-track">Fast Track</a>
+      <a href="conduent-interview-prep.html">Main Prep</a>
+      <a href="conduent-python-sql-practice.html">Python/SQL</a>
+      <a href="conduent-ai-study-tools.html">AI Tools</a>
+      <a href="#kubernetes">Kubernetes</a>
+      <a href="#api">API/Tomcat</a>
+      <a href="#data">SQL/Python</a>
+      <a href="#ai">AI/RAG</a>
+      <a href="#deeper">Optional Deeper</a>
+    </nav>
+
+    <section id="fast-track" class="watch-plan">
+      <h2>Fast Track Watch Order</h2>
+      <ol>
+        <li>CrashLoopBackOff video first: it gives you the pod failure language fast.</li>
+        <li>Service/endpoints video second: this prepares you for Kubernetes networking questions.</li>
+        <li>API 500 video third: this maps directly to their first-round question.</li>
+        <li>SQL indexing and partitioning next: short, high-value refreshers.</li>
+        <li>RAG/hallucination last: this fixes the AI answer from the first interview.</li>
+      </ol>
+      <div class="note" style="margin-top: 14px;">
+        After each video, say one sentence out loud: "In production, I would check evidence first:
+        logs, events, metrics, recent changes, and source data before taking action."
+      </div>
+    </section>
+
+    <section id="kubernetes">
+      <h2>Kubernetes And Helm</h2>
+      <div class="grid">
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>How to Fix Kubernetes CrashLoopBackOff</h3>
+              <div class="tag-row">
+                <span class="pill">Pods</span>
+                <span class="pill">CrashLoopBackOff</span>
+              </div>
+            </div>
+            <span class="duration">1:02</span>
+          </div>
+          <p class="why">
+            Use this for the exact onsite prompt: "A pod is in CrashLoopBackOff. What do you check?"
+          </p>
+          <p class="say">
+            Say back: "I check describe output, events, current logs, previous logs, probes, resource limits,
+            config changes, and recent rollout history."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=7WAHjndjWrI" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>Kubernetes Service Not Working? Troubleshoot ClusterIP, Endpoints & Labels</h3>
+              <div class="tag-row">
+                <span class="pill">Service</span>
+                <span class="pill">Endpoints</span>
+              </div>
+            </div>
+            <span class="duration">11:44</span>
+          </div>
+          <p class="why">
+            Helps you explain selectors, endpoints, targetPort, pod readiness, and why a service may route nowhere.
+          </p>
+          <p class="say">
+            Say back: "If endpoints are empty, I check labels and readiness. If endpoints exist, I test DNS,
+            ports, ingress, network policy, and the application listener."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=1VDVyCSlfDg" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>Helm Rollback Command</h3>
+              <div class="tag-row">
+                <span class="pill">Helm</span>
+                <span class="pill">Rollback</span>
+              </div>
+            </div>
+            <span class="duration">8:33</span>
+          </div>
+          <p class="why">
+            Directly supports the question: "A deployment failed after a Helm release. What do you do?"
+          </p>
+          <p class="say">
+            Say back: "I check release status and history, inspect pods/events/logs, and roll back if
+            production impact is high."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=HHjycvwTYhE" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>What is Helm in Kubernetes? Helm and Helm Charts Explained</h3>
+              <div class="tag-row">
+                <span class="pill">Helm concepts</span>
+                <span class="pill">Charts</span>
+              </div>
+            </div>
+            <span class="duration">14:10</span>
+          </div>
+          <p class="why">
+            Optional but useful if they ask what Helm is beyond rollback commands.
+          </p>
+          <p class="say">
+            Say back: "Helm packages Kubernetes manifests into reusable charts, supports values per
+            environment, and tracks release history for upgrades and rollback."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/results?search_query=What+is+Helm+in+Kubernetes+Helm+and+Helm+Charts+explained+Kubernetes+Tutorial+23" target="_blank" rel="noopener">Find Video</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="api">
+      <h2>API 500 And Tomcat/JVM</h2>
+      <div class="grid">
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>Runtime Errors Module - 500 Internal Server Error</h3>
+              <div class="tag-row">
+                <span class="pill">HTTP 500</span>
+                <span class="pill">API troubleshooting</span>
+              </div>
+            </div>
+            <span class="duration">4:37</span>
+          </div>
+          <p class="why">
+            Good for the API 500 question. It reinforces tracing the fault source and checking backend logs.
+          </p>
+          <p class="say">
+            Say back: "For a 500, I gather timestamp, correlation ID, request payload, logs, dependency health,
+            recent changes, and reproduce only when safe."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=GadRF-78UNI" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>How To Create A Thread Dump In Terminal</h3>
+              <div class="tag-row">
+                <span class="pill">Java</span>
+                <span class="pill">Tomcat/JVM</span>
+              </div>
+            </div>
+            <span class="duration">0:48</span>
+          </div>
+          <p class="why">
+            Quick refresher for Tomcat/JVM production questions: hung requests, slow threads, and blocked workers.
+          </p>
+          <p class="say">
+            Say back: "If Tomcat is slow or hung, I check application logs, CPU/memory, GC, DB pool, and capture
+            thread dumps for blocked or waiting threads."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=MrrAuhZ_dyY" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="data">
+      <h2>SQL And Python Data Processing</h2>
+      <div class="grid">
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>What are indexes in SQL Server and how do they work?</h3>
+              <div class="tag-row">
+                <span class="pill">SQL index</span>
+                <span class="pill">Optimizer</span>
+              </div>
+            </div>
+            <span class="duration">0:53</span>
+          </div>
+          <p class="why">
+            Fast refresher for the question: "Do I need an index? How do I use it in code?"
+          </p>
+          <p class="say">
+            Say back: "I do not normally call an index from code. I write selective predicates and verify the
+            optimizer uses the right access path with the execution plan."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=4RsLyv1D-vo" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>Database Partitioning in 60 Seconds</h3>
+              <div class="tag-row">
+                <span class="pill">Partitioning</span>
+                <span class="pill">Large tables</span>
+              </div>
+            </div>
+            <span class="duration">0:59</span>
+          </div>
+          <p class="why">
+            Helps explain four years of transaction data and why partition pruning matters.
+          </p>
+          <p class="say">
+            Say back: "Indexing helps find rows; partitioning divides the table so large date-based queries
+            and maintenance can target smaller sections."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=GwgcChz1M0M" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>Python quick tip - Pandas chunksize for large datasets</h3>
+              <div class="tag-row">
+                <span class="pill">Python</span>
+                <span class="pill">Large files</span>
+              </div>
+            </div>
+            <span class="duration">2:59</span>
+          </div>
+          <p class="why">
+            Useful for the 5 million record file question. The keyword they want is memory-safe chunking.
+          </p>
+          <p class="say">
+            Say back: "I would stream or chunk the file, validate rows, batch writes, log rejects, and add
+            checkpointing so the job can restart."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=pYdwKxvq-jY" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>SQL and Oracle performance backup searches</h3>
+              <div class="tag-row">
+                <span class="pill">Oracle</span>
+                <span class="pill">Explain plan</span>
+              </div>
+            </div>
+            <span class="duration">Search</span>
+          </div>
+          <p class="why">
+            Use these searches if you want more Oracle-specific refreshers on explain plans, indexes, and partitioning.
+          </p>
+          <div class="button-row" style="margin-top: 0;">
+            <a class="button" href="https://www.youtube.com/results?search_query=Oracle+SQL+explain+plan+index+tuning+short" target="_blank" rel="noopener">Oracle Explain Plan</a>
+            <a class="button" href="https://www.youtube.com/results?search_query=Oracle+partitioning+large+table+performance+short" target="_blank" rel="noopener">Oracle Partitioning</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="ai">
+      <h2>AI, RAG, And Hallucination Control</h2>
+      <div class="grid">
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>What is Retrieval Augmented Generation (RAG)? Simplified Explanation</h3>
+              <div class="tag-row">
+                <span class="pill">RAG</span>
+                <span class="pill">Short</span>
+              </div>
+            </div>
+            <span class="duration">0:35</span>
+          </div>
+          <p class="why">
+            Very quick memory jogger for defining RAG in plain English.
+          </p>
+          <p class="say">
+            Say back: "RAG retrieves relevant company knowledge first, then gives it to the model so the
+            generated answer is grounded in evidence."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=CbAQUqnrDcA" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+
+        <article class="video-card">
+          <div class="video-top">
+            <div>
+              <h3>What is RAG in AI? And how to reduce LLM hallucinations</h3>
+              <div class="tag-row">
+                <span class="pill">Hallucination</span>
+                <span class="pill">AIOps</span>
+              </div>
+            </div>
+            <span class="duration">4:45</span>
+          </div>
+          <p class="why">
+            Directly repairs the hallucination question from the first interview.
+          </p>
+          <p class="say">
+            Say back: "I reduce hallucination with grounding, source evidence, structured output, confidence
+            checks, and human review for production actions."
+          </p>
+          <a class="button primary" href="https://www.youtube.com/watch?v=HBvQod8nWfc" target="_blank" rel="noopener">Watch Video</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="deeper" class="grid">
+      <article class="summary-card">
+        <h2>Optional Deeper RAG Videos</h2>
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=oG6DADzilUQ" target="_blank" rel="noopener">
+              RAG Explained - Full Guide for Beginners
+            </a>
+            <span class="duration">13:59</span>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=tLMViADvSNE" target="_blank" rel="noopener">
+              Every RAG Strategy Explained in 13 Minutes
+            </a>
+            <span class="duration">12:51</span>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=vT-DpLvf29Q" target="_blank" rel="noopener">
+              RAG Explained: How Retrieval Augmented Generation Actually Works
+            </a>
+          </li>
+        </ul>
+      </article>
+
+      <article class="summary-card">
+        <h2>30-minute prep script</h2>
+        <ol>
+          <li>Watch CrashLoopBackOff, SQL index, partitioning, Python chunksize, RAG short.</li>
+          <li>Practice the Kubernetes service answer once using endpoints/labels/ports.</li>
+          <li>Practice API 500 answer once using timestamp/correlation ID/logs/dependencies.</li>
+          <li>Say your hallucination answer out loud twice. This one matters.</li>
+        </ol>
+        <div class="danger" style="margin-top: 14px;">
+          Do not overclaim. It is better to say, "My current environment is more VM/Azure based, but I
+          understand the Kubernetes troubleshooting flow and have prepared around it."
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      Video brush-up page for Kamalaprasad Natarajan - Conduent App Dev & Support Engineer II onsite interview.
+    </footer>
+  </main>
+</body>
+</html>

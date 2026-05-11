@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conduent Python and SQL Coding Practice</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #20242c;
+      --muted: #606b7a;
+      --line: #d8dee8;
+      --teal: #0f766e;
+      --blue: #365d8c;
+      --green: #2f6f4e;
+      --red: #a74444;
+      --gold: #a66a16;
+      --shadow: 0 14px 38px rgba(22, 32, 48, 0.10);
+      --radius: 8px;
+      --mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 20px 56px;
+    }
+
+    .hero,
+    .nav,
+    .card,
+    .drill,
+    .summary {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      min-height: 310px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      gap: 18px;
+      padding: 30px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 830px;
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 850;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .button-row,
+    .nav,
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .button-row {
+      margin-top: 24px;
+    }
+
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 780;
+      padding: 10px 14px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .button:hover,
+    .button:focus {
+      border-color: var(--teal);
+      outline: none;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-stat {
+      border-left: 4px solid var(--teal);
+      padding: 10px 0 10px 12px;
+      background: #fbfcfe;
+      border-radius: 6px;
+    }
+
+    .mini-stat:nth-child(2) {
+      border-color: var(--blue);
+    }
+
+    .mini-stat:nth-child(3) {
+      border-color: var(--gold);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 1.25rem;
+      line-height: 1.15;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 18px 0;
+      padding: 10px;
+      background: rgba(245, 247, 251, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav a {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 6px;
+      padding: 7px 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 720;
+    }
+
+    .nav a:hover,
+    .nav a:focus {
+      background: #e8eef7;
+      color: var(--ink);
+      outline: none;
+    }
+
+    section {
+      scroll-margin-top: 84px;
+      margin-top: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card,
+    .drill,
+    .summary {
+      padding: 22px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--muted);
+      font-size: 0.79rem;
+      font-weight: 760;
+      background: #fff;
+    }
+
+    .answer {
+      border-left: 4px solid var(--green);
+      background: #f3faf6;
+      border-radius: 6px;
+      padding: 12px;
+      color: #20312a;
+      font-weight: 720;
+    }
+
+    .why {
+      border-left: 4px solid var(--blue);
+      background: #f5f8fc;
+      border-radius: 6px;
+      padding: 12px;
+      color: #253348;
+    }
+
+    .danger {
+      border-left: 4px solid var(--red);
+      background: #fff6f6;
+      border-radius: 6px;
+      padding: 12px;
+      color: #403030;
+    }
+
+    .note {
+      border-left: 4px solid var(--gold);
+      background: #fffaf0;
+      border-radius: 6px;
+      padding: 12px;
+      color: #403322;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    code,
+    pre {
+      font-family: var(--mono);
+    }
+
+    code {
+      background: #eef2f7;
+      border: 1px solid #dde4ee;
+      border-radius: 4px;
+      padding: 1px 5px;
+      white-space: nowrap;
+    }
+
+    pre {
+      margin: 0;
+      overflow-x: auto;
+      color: #e8eef5;
+      background: #20242c;
+      border-radius: 6px;
+      padding: 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        padding: 18px 12px 42px;
+      }
+
+      h1 {
+        font-size: 2.15rem;
+      }
+
+      .nav {
+        position: static;
+      }
+
+      .button,
+      .nav a {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .nav,
+      .button-row {
+        display: none;
+      }
+
+      .hero,
+      .card,
+      .drill,
+      .summary {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Coding practice</div>
+        <h1>Python and SQL patterns for the onsite interview</h1>
+        <p class="hero-copy">
+          These are the coding and query patterns most likely to matter for this role:
+          production file processing, log analysis, API retries, transaction queries,
+          indexing, partitioning, and Oracle-safe thinking.
+        </p>
+        <div class="button-row">
+          <a class="button primary" href="#python">Practice Python</a>
+          <a class="button" href="#sql">Practice SQL</a>
+          <a class="button" href="conduent-ai-study-tools.html">AI Study Tools</a>
+          <a class="button" href="conduent-interview-prep.html">Main Prep</a>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="Coding practice summary">
+        <div class="mini-stat">
+          <strong>Python</strong>
+          <span>Chunking, generators, retries, logs, batching</span>
+        </div>
+        <div class="mini-stat">
+          <strong>SQL</strong>
+          <span>GROUP BY, HAVING, windows, indexes, partitions</span>
+        </div>
+        <div class="mini-stat">
+          <strong>Ops mindset</strong>
+          <span>Safe fixes, validation, audit notes, rollback thinking</span>
+        </div>
+      </aside>
+    </header>
+
+    <nav class="nav" aria-label="Coding page sections">
+      <a href="#python">Python</a>
+      <a href="#sql">SQL</a>
+      <a href="#plsql">PL/SQL</a>
+      <a href="#drills">Live Drills</a>
+      <a href="conduent-video-resources.html">Videos</a>
+      <a href="conduent-ai-study-tools.html">AI Tools</a>
+    </nav>
+
+    <section class="summary">
+      <h2>What To Say Before Coding</h2>
+      <p>
+        If they ask you to write code or SQL, start with one sentence that shows production judgment:
+      </p>
+      <div class="answer">
+        "Before writing the final solution, I would confirm the input format, expected output, volume,
+        error handling, and whether this is ad hoc analysis or production-safe code."
+      </div>
+    </section>
+
+    <section id="python">
+      <h2>Python Patterns</h2>
+      <div class="grid">
+        <article class="card">
+          <div>
+            <h3>1. Process a large CSV without loading everything</h3>
+            <div class="tag-row">
+              <span class="pill">5 million records</span>
+              <span class="pill">Memory safe</span>
+            </div>
+          </div>
+          <p class="why">
+            Use this when they ask about processing large transaction files.
+          </p>
+          <pre><code>import csv
+
+def process_file(path, batch_size=5000):
+    batch = []
+    total = success = failed = 0
+
+    with open(path, newline="", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            total += 1
+            try:
+                record = validate_and_transform(row)
+                batch.append(record)
+            except ValueError as error:
+                failed += 1
+                write_reject(row, str(error))
+                continue
+
+            if len(batch) == batch_size:
+                success += process_batch(batch)
+                batch.clear()
+
+    if batch:
+        success += process_batch(batch)
+
+    return {"total": total, "success": success, "failed": failed}</code></pre>
+          <p class="answer">
+            Interview line: "I stream or chunk the file, validate rows, batch writes, log rejects,
+            and make the job restartable."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>2. Generator pattern for large files</h3>
+            <div class="tag-row">
+              <span class="pill">Generator</span>
+              <span class="pill">Low memory</span>
+            </div>
+          </div>
+          <pre><code>def read_transactions(path):
+    with open(path, encoding="utf-8") as file:
+        for line_number, line in enumerate(file, start=1):
+            line = line.strip()
+            if not line:
+                continue
+
+            try:
+                yield parse_transaction(line)
+            except ValueError as error:
+                write_reject({"line": line_number, "raw": line}, str(error))
+
+for transaction in read_transactions("transactions.txt"):
+    handle_transaction(transaction)</code></pre>
+          <p class="answer">
+            Say: "A generator lets me process one record at a time instead of keeping millions of
+            records in memory."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>3. Retry an API call safely</h3>
+            <div class="tag-row">
+              <span class="pill">API support</span>
+              <span class="pill">Timeouts</span>
+            </div>
+          </div>
+          <pre><code>import time
+import requests
+
+def call_api(url, payload, retries=3, timeout=10):
+    for attempt in range(1, retries + 1):
+        try:
+            response = requests.post(url, json=payload, timeout=timeout)
+            response.raise_for_status()
+            return response.json()
+        except requests.RequestException as error:
+            if attempt == retries:
+                raise
+
+            wait_seconds = 2 ** attempt
+            log_warning(f"API failed on attempt {attempt}: {error}")
+            time.sleep(wait_seconds)</code></pre>
+          <p class="danger">
+            Production note: only retry idempotent operations or requests with safe duplicate handling.
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>4. Parse logs and count errors</h3>
+            <div class="tag-row">
+              <span class="pill">Log analysis</span>
+              <span class="pill">Incident triage</span>
+            </div>
+          </div>
+          <pre><code>from collections import Counter
+
+def top_errors(log_path):
+    counter = Counter()
+
+    with open(log_path, encoding="utf-8", errors="replace") as file:
+        for line in file:
+            if "ERROR" not in line:
+                continue
+
+            if "timeout" in line.lower():
+                counter["timeout"] += 1
+            elif "connection" in line.lower():
+                counter["connection"] += 1
+            elif "ora-" in line.lower():
+                counter["oracle"] += 1
+            else:
+                counter["other"] += 1
+
+    return counter.most_common()</code></pre>
+          <p class="answer">
+            Say: "For incident triage, I summarize repeating error patterns first, then inspect sample
+            stack traces and timestamps."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>5. Checkpoint long-running batch work</h3>
+            <div class="tag-row">
+              <span class="pill">Restartable job</span>
+              <span class="pill">Batch support</span>
+            </div>
+          </div>
+          <pre><code>def load_checkpoint(path="checkpoint.txt"):
+    try:
+        with open(path, encoding="utf-8") as file:
+            return int(file.read().strip())
+    except FileNotFoundError:
+        return 0
+
+def save_checkpoint(offset, path="checkpoint.txt"):
+    with open(path, "w", encoding="utf-8") as file:
+        file.write(str(offset))
+
+start_at = load_checkpoint()
+
+for index, record in enumerate(read_transactions("transactions.txt"), start=1):
+    if index &lt;= start_at:
+        continue
+
+    process_record(record)
+
+    if index % 1000 == 0:
+        save_checkpoint(index)</code></pre>
+          <p class="answer">
+            Say: "Checkpointing prevents a failed batch from restarting from zero."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>6. Batch database inserts</h3>
+            <div class="tag-row">
+              <span class="pill">DB writes</span>
+              <span class="pill">Performance</span>
+            </div>
+          </div>
+          <pre><code>def insert_transactions(connection, rows):
+    sql = """
+        INSERT INTO transaction_stage
+            (transaction_id, user_id, status, payment_amount)
+        VALUES
+            (:transaction_id, :user_id, :status, :payment_amount)
+    """
+
+    with connection.cursor() as cursor:
+        cursor.executemany(sql, rows)
+    connection.commit()</code></pre>
+          <p class="danger">
+            Production note: for updates/deletes in production, confirm approval, backup/rollback plan,
+            row count, and audit notes before committing.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="sql">
+      <h2>SQL Patterns</h2>
+      <div class="grid">
+        <article class="card">
+          <div>
+            <h3>1. Users with more than three failures</h3>
+            <div class="tag-row">
+              <span class="pill">GROUP BY</span>
+              <span class="pill">HAVING</span>
+            </div>
+          </div>
+          <pre><code>SELECT user_id, COUNT(*) AS failure_count
+FROM transaction_history
+WHERE status = 'FAILED'
+GROUP BY user_id
+HAVING COUNT(*) &gt; 3;</code></pre>
+          <p class="answer">
+            Say: "WHERE filters rows before grouping. HAVING filters grouped results."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>2. Failures by error in a date range</h3>
+            <div class="tag-row">
+              <span class="pill">Date filter</span>
+              <span class="pill">RCA</span>
+            </div>
+          </div>
+          <pre><code>SELECT exception_message, COUNT(*) AS failure_count
+FROM transaction_history
+WHERE status = 'FAILED'
+  AND transaction_date &gt;= :start_date
+  AND transaction_date &lt; :end_date
+GROUP BY exception_message
+ORDER BY failure_count DESC;</code></pre>
+          <p class="answer">
+            Say: "For production triage, I group by exception to find the dominant failure pattern."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>3. Latest transaction per user</h3>
+            <div class="tag-row">
+              <span class="pill">Window function</span>
+              <span class="pill">ROW_NUMBER</span>
+            </div>
+          </div>
+          <pre><code>SELECT user_id, transaction_id, status, transaction_date
+FROM (
+    SELECT
+        user_id,
+        transaction_id,
+        status,
+        transaction_date,
+        ROW_NUMBER() OVER (
+            PARTITION BY user_id
+            ORDER BY transaction_date DESC
+        ) AS rn
+    FROM transaction_history
+) ranked
+WHERE rn = 1;</code></pre>
+          <p class="answer">
+            Say: "ROW_NUMBER helps pick the latest record per user without messy self-joins."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>4. Find duplicate transaction IDs</h3>
+            <div class="tag-row">
+              <span class="pill">Data quality</span>
+              <span class="pill">Duplicate check</span>
+            </div>
+          </div>
+          <pre><code>SELECT transaction_id, COUNT(*) AS duplicate_count
+FROM transaction_history
+GROUP BY transaction_id
+HAVING COUNT(*) &gt; 1;</code></pre>
+          <p class="answer">
+            Say: "For data issues, I first quantify the bad records before proposing correction."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>5. Index for the failure query</h3>
+            <div class="tag-row">
+              <span class="pill">Composite index</span>
+              <span class="pill">Execution plan</span>
+            </div>
+          </div>
+          <pre><code>CREATE INDEX idx_txn_status_date_user
+ON transaction_history (status, transaction_date, user_id);</code></pre>
+          <p class="why">
+            Final index order depends on selectivity, database engine, and query patterns.
+          </p>
+          <p class="answer">
+            Say: "I would check the execution plan and table statistics before and after adding the index."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>6. Explain plan thinking</h3>
+            <div class="tag-row">
+              <span class="pill">Oracle</span>
+              <span class="pill">MySQL</span>
+            </div>
+          </div>
+          <pre><code>-- Oracle style
+EXPLAIN PLAN FOR
+SELECT user_id, COUNT(*)
+FROM transaction_history
+WHERE status = 'FAILED'
+GROUP BY user_id;
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+
+-- MySQL style
+EXPLAIN ANALYZE
+SELECT user_id, COUNT(*)
+FROM transaction_history
+WHERE status = 'FAILED'
+GROUP BY user_id;</code></pre>
+          <p class="answer">
+            Say: "I look for full table scans, high row estimates, expensive sorts, bad joins, and whether
+            the index is actually being used."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>7. Four years of transaction data</h3>
+            <div class="tag-row">
+              <span class="pill">Partitioning</span>
+              <span class="pill">Archive</span>
+            </div>
+          </div>
+          <pre><code>-- Conceptual Oracle range partitioning example
+CREATE TABLE transaction_history (
+    transaction_id NUMBER,
+    user_id NUMBER,
+    status VARCHAR2(30),
+    transaction_date DATE,
+    payment_amount NUMBER
+)
+PARTITION BY RANGE (transaction_date) (
+    PARTITION p_2025_q1 VALUES LESS THAN (DATE '2025-04-01'),
+    PARTITION p_2025_q2 VALUES LESS THAN (DATE '2025-07-01'),
+    PARTITION p_future VALUES LESS THAN (MAXVALUE)
+);</code></pre>
+          <p class="answer">
+            Say: "For large time-based data, partitioning helps pruning, archival, and maintenance.
+            It is not a substitute for good predicates and indexes."
+          </p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>8. Safe production update pattern</h3>
+            <div class="tag-row">
+              <span class="pill">Production safety</span>
+              <span class="pill">Rollback</span>
+            </div>
+          </div>
+          <pre><code>-- Step 1: confirm affected rows
+SELECT COUNT(*)
+FROM transaction_history
+WHERE status = 'PENDING'
+  AND transaction_date &lt; SYSDATE - 2;
+
+-- Step 2: select sample rows for validation
+SELECT transaction_id, user_id, status, transaction_date
+FROM transaction_history
+WHERE status = 'PENDING'
+  AND transaction_date &lt; SYSDATE - 2
+FETCH FIRST 20 ROWS ONLY;</code></pre>
+          <p class="danger">
+            Do not say you would update production directly. Say you would confirm impact, approval,
+            backup, rollback plan, and validation query first.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="plsql">
+      <h2>Oracle / PL/SQL Talking Points</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Basic controlled PL/SQL block</h3>
+          <pre><code>BEGIN
+    UPDATE transaction_history
+    SET status = 'READY_FOR_REPROCESS'
+    WHERE transaction_id = :transaction_id
+      AND status = 'FAILED';
+
+    IF SQL%ROWCOUNT = 1 THEN
+        COMMIT;
+    ELSE
+        ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20001, 'Unexpected row count');
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE;
+END;</code></pre>
+          <p class="answer">
+            Say: "I use row-count validation because production changes should affect exactly the expected rows."
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>PL/SQL points to remember</h3>
+          <ul>
+            <li><code>SQL%ROWCOUNT</code> tells how many rows the last DML changed.</li>
+            <li><code>COMMIT</code> makes changes permanent; <code>ROLLBACK</code> reverses uncommitted work.</li>
+            <li>Use bind variables instead of string-built SQL where possible.</li>
+            <li>For production, test with <code>SELECT</code> first and document approval.</li>
+            <li>Never hide errors silently; log and re-raise when appropriate.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="drills" class="grid">
+      <article class="drill">
+        <h2>Live Coding Drills</h2>
+        <ol>
+          <li>Write SQL for users with more than three failures in the last 24 hours.</li>
+          <li>Write SQL to find the latest transaction per user.</li>
+          <li>Explain which index you would create and why.</li>
+          <li>Write Python to read a large CSV in batches.</li>
+          <li>Write Python to count top error types from a log file.</li>
+          <li>Explain how you would make a long-running file job restartable.</li>
+        </ol>
+      </article>
+
+      <article class="drill">
+        <h2>What They Are Really Testing</h2>
+        <ul>
+          <li>Can you avoid loading huge files into memory?</li>
+          <li>Can you use <code>GROUP BY</code>, <code>HAVING</code>, and date filters correctly?</li>
+          <li>Do you understand that indexes are chosen by the optimizer?</li>
+          <li>Do you think about rollback and validation before production changes?</li>
+          <li>Can you explain code in plain English while writing it?</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer class="footer">
+      Python and SQL coding practice for Kamalaprasad Natarajan - Conduent onsite interview.
+    </footer>
+  </main>
+</body>
+</html>
