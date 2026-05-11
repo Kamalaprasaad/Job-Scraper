@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conduent App Dev & Support Engineer II Interview Prep</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #20242c;
+      --muted: #606b7a;
+      --line: #d8dee8;
+      --teal: #0f766e;
+      --green: #2f6f4e;
+      --blue: #365d8c;
+      --red: #a74444;
+      --gold: #a66a16;
+      --shadow: 0 14px 38px rgba(22, 32, 48, 0.10);
+      --radius: 8px;
+      --mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 20px 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .hero-main,
+    .side-panel,
+    .answer-card,
+    .story-card,
+    .question-bank,
+    .quick-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 340px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: 8px;
+      color: var(--teal);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 820px;
+      font-size: clamp(2rem, 4.2vw, 4.15rem);
+      font-weight: 850;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .hero-actions,
+    .top-nav,
+    .tag-row,
+    .toolbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+    }
+
+    .button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 750;
+      padding: 10px 14px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .button:hover {
+      border-color: var(--teal);
+    }
+
+    .side-panel {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .metric {
+      border-left: 4px solid var(--teal);
+      padding-left: 12px;
+    }
+
+    .metric:nth-child(2) {
+      border-color: var(--blue);
+    }
+
+    .metric:nth-child(3) {
+      border-color: var(--gold);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.4rem;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 247, 251, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px;
+      margin: 18px 0;
+    }
+
+    .top-nav a {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 6px;
+      padding: 7px 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 720;
+    }
+
+    .top-nav a:hover,
+    .top-nav a:focus {
+      background: #e8eef7;
+      color: var(--ink);
+      outline: none;
+    }
+
+    section {
+      scroll-margin-top: 84px;
+      margin-top: 24px;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .quick-panel,
+    .question-bank {
+      padding: 22px;
+      border-radius: var(--radius);
+    }
+
+    .quick-panel p,
+    .question-bank p,
+    .answer-card p,
+    .story-card p {
+      margin: 0 0 12px;
+    }
+
+    .quick-panel p:last-child,
+    .question-bank p:last-child,
+    .answer-card p:last-child,
+    .story-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro-block {
+      border-left: 4px solid var(--green);
+      background: #f3faf6;
+      padding: 16px;
+      border-radius: 6px;
+      color: #20312a;
+      font-size: 1.02rem;
+    }
+
+    .answers-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .answer-card {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .answer-card h3 {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .number {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e8f4f1;
+      color: var(--teal);
+      font-size: 0.86rem;
+      font-weight: 850;
+    }
+
+    .answer-lead {
+      color: #2d3642;
+      font-weight: 760;
+      border-left: 4px solid var(--blue);
+      padding-left: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--muted);
+      font-size: 0.79rem;
+      font-weight: 760;
+      background: #fff;
+    }
+
+    .tag-row {
+      margin-top: -3px;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    code,
+    pre {
+      font-family: var(--mono);
+    }
+
+    pre {
+      margin: 0;
+      overflow-x: auto;
+      color: #e8eef5;
+      background: #20242c;
+      border-radius: 6px;
+      padding: 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .inline-code {
+      font-family: var(--mono);
+      background: #eef2f7;
+      border: 1px solid #dde4ee;
+      border-radius: 4px;
+      padding: 1px 5px;
+      white-space: nowrap;
+    }
+
+    .callout {
+      border: 1px solid #e4d4aa;
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      background: #fffaf0;
+      padding: 13px;
+      color: #403322;
+    }
+
+    .danger {
+      border-color: #ead0d0;
+      border-left-color: var(--red);
+      background: #fff6f6;
+    }
+
+    .story-card {
+      padding: 22px;
+    }
+
+    .star-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .star-step {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+      background: #fbfcfe;
+    }
+
+    .star-step strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--teal);
+    }
+
+    .toolbar {
+      justify-content: space-between;
+      margin: 0 0 14px;
+      gap: 12px;
+    }
+
+    .search {
+      flex: 1 1 280px;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font: inherit;
+      background: #fff;
+    }
+
+    .search:focus {
+      outline: 3px solid rgba(15, 118, 110, 0.18);
+      border-color: var(--teal);
+    }
+
+    .question-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .question-list a {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 11px 12px;
+      color: var(--ink);
+      text-decoration: none;
+      background: #fbfcfe;
+      font-weight: 700;
+    }
+
+    .question-list a:hover {
+      border-color: var(--teal);
+      background: #f0faf7;
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-two,
+      .answers-grid,
+      .star-grid,
+      .question-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main {
+        min-height: auto;
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page-shell {
+        padding: 18px 12px 42px;
+      }
+
+      h1 {
+        font-size: 2.15rem;
+      }
+
+      .top-nav {
+        position: static;
+      }
+
+      .button,
+      .top-nav a {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .top-nav,
+      .toolbar,
+      .hero-actions {
+        display: none;
+      }
+
+      .hero-main,
+      .side-panel,
+      .answer-card,
+      .story-card,
+      .question-bank,
+      .quick-panel {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .answers-grid,
+      .grid-two {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <div class="hero-main">
+        <div>
+          <div class="eyebrow">Conduent onsite prep</div>
+          <h1>App Dev & Support Engineer II interview answers</h1>
+          <p class="hero-copy">
+            Use this as a speaking guide for the face-to-face round. Keep your answers calm, structured,
+            evidence-based, and tied to production support: detect the issue, isolate the scope,
+            communicate status, fix safely, and document the learning.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <a class="button primary" href="#answers">Review Answers</a>
+          <a class="button" href="#story">Practice STAR Story</a>
+          <button class="button" type="button" onclick="window.print()">Print Prep Sheet</button>
+        </div>
+      </div>
+
+      <aside class="side-panel" aria-label="Interview focus areas">
+        <div class="metric">
+          <strong>10</strong>
+          <span>manager-level answers to practice out loud</span>
+        </div>
+        <div class="metric">
+          <strong>STAR</strong>
+          <span>incident story format for client and internal communication</span>
+        </div>
+        <div class="metric">
+          <strong>Ops</strong>
+          <span>Kubernetes, SQL, Python, API support, AI/RAG, and production RCA</span>
+        </div>
+      </aside>
+    </header>
+
+    <nav class="top-nav" aria-label="Page sections">
+      <a href="#opening">Opening</a>
+      <a href="#answers">Answers</a>
+      <a href="#sql">SQL Focus</a>
+      <a href="#ai">AI/RAG</a>
+      <a href="#story">STAR Story</a>
+      <a href="#questions">Questions To Ask</a>
+    </nav>
+
+    <section id="opening" class="grid-two">
+      <div class="quick-panel">
+        <h2>Your 45-second introduction</h2>
+        <div class="intro-block">
+          Hi, I am Kamalaprasad Natarajan. I am currently based in New Jersey and work as a
+          production support and automation engineer supporting healthcare applications in high-volume
+          production environments. My work includes Tier 1 and Tier 2 incident handling, API
+          troubleshooting, SQL and Oracle data checks, log analysis, batch and file processing, and
+          automation using scripting and AI-assisted tools. I am interested in this Conduent role because
+          it combines production support, databases, Tomcat, Kubernetes, monitoring, and AI-driven
+          operations. I enjoy roles where I can troubleshoot live issues, communicate clearly during
+          incidents, document runbooks, and reduce recurring problems through automation.
+        </div>
+      </div>
+
+      <div class="quick-panel">
+        <h2>Manager interview posture</h2>
+        <p>
+          The onsite round is likely checking depth, honesty, and team fit. Answer in a production
+          support pattern: scope, evidence, isolation, mitigation, validation, communication, and RCA.
+        </p>
+        <div class="callout">
+          Strong phrase to use: "I would first confirm the blast radius and recent changes, then use logs,
+          metrics, events, and database evidence before making a change in production."
+        </div>
+      </div>
+    </section>
+
+    <section id="answers">
+      <div class="toolbar">
+        <h2>Prepared Answers</h2>
+        <input class="search" id="filterInput" type="search" placeholder="Filter by keyword: Kubernetes, SQL, RAG, Python..." />
+      </div>
+
+      <div class="answers-grid">
+        <article id="crashloop" class="answer-card" data-keywords="kubernetes pod crashloopbackoff logs previous describe events probes limits configmap secret">
+          <div>
+            <h3><span class="number">1</span>A pod is in CrashLoopBackOff. What do you check?</h3>
+            <div class="tag-row">
+              <span class="pill">Kubernetes</span>
+              <span class="pill">Production triage</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            I first confirm whether the container is crashing because of application error, bad config,
+            dependency failure, resource pressure, failed probes, or a bad rollout.
+          </p>
+          <ol>
+            <li>Check pod status, restart count, node, and age.</li>
+            <li>Describe the pod and read Events for image pull errors, OOMKilled, probe failures, or scheduling issues.</li>
+            <li>Check current logs and previous crash logs because the container may restart too quickly.</li>
+            <li>Compare recent deployment changes: image tag, ConfigMap, Secret, env vars, resource limits, and probes.</li>
+            <li>If needed, roll back the deployment after confirming it is safer than continuing the failed release.</li>
+          </ol>
+          <pre><code>kubectl get pods -n &lt;namespace&gt; -o wide
+kubectl describe pod &lt;pod-name&gt; -n &lt;namespace&gt;
+kubectl logs &lt;pod-name&gt; -n &lt;namespace&gt;
+kubectl logs &lt;pod-name&gt; -n &lt;namespace&gt; --previous
+kubectl get events -n &lt;namespace&gt; --sort-by=.lastTimestamp
+kubectl rollout history deployment/&lt;deployment&gt; -n &lt;namespace&gt;</code></pre>
+          <div class="callout">
+            Interview closing line: "I would not just restart blindly. I would capture logs and events first,
+            because the first evidence usually explains the real failure."
+          </div>
+        </article>
+
+        <article id="service" class="answer-card" data-keywords="kubernetes service unreachable svc endpoints ingress dns networkpolicy targetport selector">
+          <div>
+            <h3><span class="number">2</span>A Kubernetes service is not reachable. How do you troubleshoot?</h3>
+            <div class="tag-row">
+              <span class="pill">Kubernetes networking</span>
+              <span class="pill">Service discovery</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            I isolate whether it is a pod readiness issue, selector mismatch, wrong port mapping,
+            DNS issue, ingress/load balancer issue, or network policy restriction.
+          </p>
+          <ol>
+            <li>Check service definition, type, port, targetPort, and selector labels.</li>
+            <li>Check endpoints. If there are no endpoints, the service is not matching ready pods.</li>
+            <li>Verify pods are Ready and their labels match the service selector.</li>
+            <li>Test DNS and connectivity from another pod inside the same namespace.</li>
+            <li>Check ingress, load balancer, firewall rules, and network policies for external access.</li>
+          </ol>
+          <pre><code>kubectl get svc,endpoints -n &lt;namespace&gt;
+kubectl describe svc &lt;service&gt; -n &lt;namespace&gt;
+kubectl get pods -n &lt;namespace&gt; --show-labels
+kubectl describe ingress &lt;ingress&gt; -n &lt;namespace&gt;
+kubectl get networkpolicy -n &lt;namespace&gt;</code></pre>
+          <p>
+            If endpoints are empty, I focus on labels, readiness probes, and pod health. If endpoints are
+            present, I test DNS, ports, application listener, and network path.
+          </p>
+        </article>
+
+        <article id="helm" class="answer-card" data-keywords="helm release rollback deployment failed rollout values chart kubernetes">
+          <div>
+            <h3><span class="number">3</span>A deployment failed after a Helm release. What do you do?</h3>
+            <div class="tag-row">
+              <span class="pill">Helm</span>
+              <span class="pill">Release safety</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            I treat it as a release incident: confirm the failed revision, inspect what changed, check
+            Kubernetes events/logs, and roll back if user impact or risk is high.
+          </p>
+          <ol>
+            <li>Check Helm release status and revision history.</li>
+            <li>Review rendered values and compare the failed release with the previous working release.</li>
+            <li>Check deployment rollout status, pods, events, and logs.</li>
+            <li>If the issue is clear and low risk, fix values and redeploy. If production is impacted, roll back first.</li>
+            <li>After recovery, document root cause and add validation to the pipeline if possible.</li>
+          </ol>
+          <pre><code>helm list -n &lt;namespace&gt;
+helm status &lt;release&gt; -n &lt;namespace&gt;
+helm history &lt;release&gt; -n &lt;namespace&gt;
+kubectl rollout status deployment/&lt;deployment&gt; -n &lt;namespace&gt;
+helm rollback &lt;release&gt; &lt;revision&gt; -n &lt;namespace&gt;</code></pre>
+          <div class="callout danger">
+            Strong wording: "For production, my first priority is service recovery. Root cause can continue after
+            the platform is stable."
+          </div>
+        </article>
+
+        <article id="api500" class="answer-card" data-keywords="api 500 error logs database dependency tomcat http incident trace">
+          <div>
+            <h3><span class="number">4</span>An API returns HTTP 500. Walk me through your steps.</h3>
+            <div class="tag-row">
+              <span class="pill">API support</span>
+              <span class="pill">Tomcat</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            A 500 means the server failed while processing the request, so I use request evidence to
+            trace from client input to application logs, dependencies, and recent changes.
+          </p>
+          <ol>
+            <li>Confirm the exact endpoint, request payload, timestamp, user/account, correlation ID, and frequency.</li>
+            <li>Check application and Tomcat logs around the timestamp for stack trace or exception message.</li>
+            <li>Check whether the issue is isolated to one payload/user or broad across the API.</li>
+            <li>Validate dependencies: database query, downstream API, credentials, connection pool, timeout, disk, memory, CPU.</li>
+            <li>Check recent deployment/config changes and compare with a working request.</li>
+            <li>Mitigate, communicate status, and create RCA with cause, impact, fix, and prevention.</li>
+          </ol>
+          <p>
+            Good interview line: "I do not start by guessing code changes. I start with correlation ID,
+            timestamp, logs, and dependency checks."
+          </p>
+        </article>
+
+        <article id="sql" class="answer-card" data-keywords="sql oracle mysql transaction table years slow index partition archive explain plan statistics">
+          <div>
+            <h3><span class="number">5</span>A transaction table has 4 years of data and queries are slow. How do you optimize?</h3>
+            <div class="tag-row">
+              <span class="pill">SQL</span>
+              <span class="pill">Oracle/MySQL</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            I first identify the actual query pattern and execution plan. Then I tune predicates,
+            indexes, statistics, and partitioning based on how the table is accessed.
+          </p>
+          <ol>
+            <li>Find the slow SQL, bind values, frequency, and whether it scans old data unnecessarily.</li>
+            <li>Use EXPLAIN PLAN or EXPLAIN ANALYZE to check full table scans, joins, sort, and index usage.</li>
+            <li>Avoid <span class="inline-code">SELECT *</span>; select only needed columns and filter early.</li>
+            <li>Add or adjust composite indexes based on common filters like status, date, user ID, or transaction ID.</li>
+            <li>Use date-based partitioning for large historical transaction data so recent queries scan fewer partitions.</li>
+            <li>Archive older data if the business only needs recent data for operational queries.</li>
+            <li>Refresh statistics and validate improvement with before/after execution time and plan comparison.</li>
+          </ol>
+          <pre><code>SELECT user_id, COUNT(*) AS failure_count
+FROM transaction_history
+WHERE status = 'FAILED'
+  AND transaction_date &gt;= :start_date
+  AND transaction_date &lt; :end_date
+GROUP BY user_id
+HAVING COUNT(*) &gt; 3;</code></pre>
+        </article>
+
+        <article id="index-partition" class="answer-card" data-keywords="difference index partitioning database optimizer composite local global">
+          <div>
+            <h3><span class="number">6</span>Difference between index and partitioning?</h3>
+            <div class="tag-row">
+              <span class="pill">Database design</span>
+              <span class="pill">Optimization</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            An index helps the database find rows faster. Partitioning physically divides a large table
+            into smaller logical pieces, often by date or range.
+          </p>
+          <ol>
+            <li>An index is like a lookup structure for columns used in WHERE, JOIN, ORDER BY, or GROUP BY.</li>
+            <li>Partitioning divides the table into manageable sections, such as monthly or yearly partitions.</li>
+            <li>Indexes reduce row lookup cost, but they add overhead to inserts, updates, deletes, and storage.</li>
+            <li>Partitioning improves large-table manageability, archival, partition pruning, and maintenance.</li>
+            <li>They can work together: a partitioned transaction table can also have local or global indexes.</li>
+          </ol>
+          <div class="callout">
+            Interview phrase: "We usually do not call an index directly from application code. We write selective
+            predicates and maintain good indexes and statistics so the optimizer chooses the best path."
+          </div>
+        </article>
+
+        <article id="python-file" class="answer-card" data-keywords="python file 5 million records streaming chunks batch generator restart checkpoint">
+          <div>
+            <h3><span class="number">7</span>How do you process a 5 million record file in Python?</h3>
+            <div class="tag-row">
+              <span class="pill">Python</span>
+              <span class="pill">Batch processing</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            I would not load the whole file into memory. I would stream it or process it in chunks,
+            validate records, batch writes, and make the process restartable.
+          </p>
+          <ol>
+            <li>Understand file type: CSV, JSON lines, fixed-width, XML, or nested JSON.</li>
+            <li>Read line by line or in chunks instead of loading the full file.</li>
+            <li>Validate each record and write rejected records to a separate error file with reason.</li>
+            <li>Use batch inserts or batch API calls to avoid one transaction per row.</li>
+            <li>Add checkpointing so the job can restart from the last successful offset or batch.</li>
+            <li>Log counts: total, success, failed, skipped, duration, and memory usage.</li>
+          </ol>
+          <pre><code>import csv
+
+batch = []
+batch_size = 5000
+
+with open("transactions.csv", newline="", encoding="utf-8") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        # validate and transform each row
+        batch.append(row)
+
+        if len(batch) == batch_size:
+            process_batch(batch)
+            batch.clear()
+
+if batch:
+    process_batch(batch)</code></pre>
+        </article>
+
+        <article id="ai-summary" class="answer-card" data-keywords="ai incident summary validation hallucination accuracy logs ticket runbook human review">
+          <div>
+            <h3><span class="number">8</span>How do you validate AI-generated incident summaries?</h3>
+            <div class="tag-row">
+              <span class="pill">AI operations</span>
+              <span class="pill">Governance</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            I validate AI summaries against source evidence: logs, alerts, timestamps, tickets,
+            runbooks, and actual remediation steps. The AI output is a draft, not the final truth.
+          </p>
+          <ol>
+            <li>Ground the model with approved source data instead of asking open-ended questions.</li>
+            <li>Require structured output: impact, timeline, probable cause, evidence, action taken, next step.</li>
+            <li>Ask the model to say "not enough evidence" when logs or facts are missing.</li>
+            <li>Compare the summary with monitoring data, ticket notes, and engineer actions.</li>
+            <li>Use human review before customer-facing RCA or production remediation.</li>
+            <li>Track accuracy by comparing AI summaries with final RCA and known incident categories.</li>
+          </ol>
+          <div class="callout danger">
+            Say this clearly: "To reduce hallucination, I ground the AI with logs and approved runbooks,
+            require evidence, and keep human approval for production actions."
+          </div>
+        </article>
+
+        <article id="ai" class="answer-card" data-keywords="rag retrieval augmented generation vector database embeddings aiops runbooks tickets logs">
+          <div>
+            <h3><span class="number">9</span>What is RAG and where would you use it in IT operations?</h3>
+            <div class="tag-row">
+              <span class="pill">RAG</span>
+              <span class="pill">AIOps</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            RAG means Retrieval-Augmented Generation. The system retrieves relevant internal knowledge
+            first, then gives that context to the language model so the answer is grounded in company data.
+          </p>
+          <ol>
+            <li>Input: incident description, alert, log snippet, error code, or ticket text.</li>
+            <li>Retrieval: find similar incidents, runbooks, KB articles, deployment notes, and known error patterns.</li>
+            <li>Generation: produce probable cause, next troubleshooting steps, severity suggestion, and source references.</li>
+            <li>Validation: show evidence and confidence, then require engineer review for high-risk actions.</li>
+          </ol>
+          <p>
+            I would use RAG for incident triage, ticket summarization, runbook search, known-error matching,
+            alert correlation, and drafting RCA notes.
+          </p>
+        </article>
+
+        <article id="production-story" class="answer-card" data-keywords="production incident client internal communication star story api database healthcare">
+          <div>
+            <h3><span class="number">10</span>Tell me about a production incident where you communicated with client/internal teams.</h3>
+            <div class="tag-row">
+              <span class="pill">STAR</span>
+              <span class="pill">Communication</span>
+            </div>
+          </div>
+          <p class="answer-lead">
+            Use a calm incident story. Focus less on heroics and more on ownership, communication,
+            evidence, and prevention.
+          </p>
+          <p>
+            <strong>Situation:</strong> In my current production support role, we had an issue where a set of
+            transaction/API requests started failing and users were seeing errors during processing.
+          </p>
+          <p>
+            <strong>Task:</strong> My role was to triage the incident, identify whether it was application,
+            data, or dependency related, keep internal stakeholders updated, and help restore processing.
+          </p>
+          <p>
+            <strong>Action:</strong> I collected the timestamp, affected request details, and error messages.
+            I checked application logs, database records, and compared failed transactions with successful
+            ones. I updated the internal team with findings, documented ticket notes clearly, and escalated
+            with evidence when the issue required another team.
+          </p>
+          <p>
+            <strong>Result:</strong> We isolated the failure pattern, restored processing, and documented the
+            root cause and next-step prevention in the ticket/runbook so similar incidents could be handled
+            faster in the future.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="story" class="story-card">
+      <h2>STAR Format For The Onsite Round</h2>
+      <p>
+        Keep one strong story ready for incidents, one for automation, and one for learning a new tool.
+        The best answers sound measured, not memorized.
+      </p>
+      <div class="star-grid">
+        <div class="star-step">
+          <strong>Situation</strong>
+          What was happening, which system was affected, and why it mattered.
+        </div>
+        <div class="star-step">
+          <strong>Task</strong>
+          Your responsibility: triage, communication, fix, escalation, validation.
+        </div>
+        <div class="star-step">
+          <strong>Action</strong>
+          Evidence gathered, commands/logs/SQL used, people contacted, mitigation taken.
+        </div>
+        <div class="star-step">
+          <strong>Result</strong>
+          Recovery, reduced impact, documented RCA, automation, monitoring, or prevention.
+        </div>
+      </div>
+    </section>
+
+    <section id="questions" class="question-bank">
+      <h2>Questions To Ask The Manager</h2>
+      <div class="question-list">
+        <a href="#questions">What are the most common production incidents this team handles?</a>
+        <a href="#questions">Which platforms are most used day to day: Oracle, MySQL, Tomcat, Kubernetes, or cloud?</a>
+        <a href="#questions">What monitoring tools are currently in place: Prometheus, Grafana, ELK, Splunk, or others?</a>
+        <a href="#questions">How does the team handle on-call, escalation, and after-hours support?</a>
+        <a href="#questions">What would success look like in the first 90 days for this role?</a>
+        <a href="#questions">Are there current automation or AIOps initiatives the new hire would help with?</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Prepared for Kamalaprasad Natarajan - Conduent App Dev & Support Engineer II onsite interview.
+    </footer>
+  </main>
+
+  <script>
+    const filterInput = document.getElementById("filterInput");
+    const cards = Array.from(document.querySelectorAll(".answer-card"));
+
+    filterInput.addEventListener("input", () => {
+      const query = filterInput.value.trim().toLowerCase();
+
+      cards.forEach((card) => {
+        const text = `${card.textContent} ${card.dataset.keywords || ""}`.toLowerCase();
+        card.style.display = !query || text.includes(query) ? "flex" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
