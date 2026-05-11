@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conduent Previous Interview Questions</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #20242c;
+      --muted: #606b7a;
+      --line: #d8dee8;
+      --teal: #0f766e;
+      --blue: #365d8c;
+      --green: #2f6f4e;
+      --red: #a74444;
+      --gold: #a66a16;
+      --shadow: 0 14px 38px rgba(22, 32, 48, 0.10);
+      --radius: 8px;
+      --mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 20px 56px;
+    }
+
+    .hero,
+    .nav,
+    .question-card,
+    .practice-card,
+    .summary-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      min-height: 300px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      gap: 18px;
+      padding: 30px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 850;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-copy {
+      max-width: 740px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .button-row,
+    .nav,
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .button-row {
+      margin-top: 24px;
+    }
+
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 780;
+      padding: 10px 14px;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .button:hover,
+    .button:focus {
+      border-color: var(--teal);
+      outline: none;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-stat {
+      border-left: 4px solid var(--teal);
+      padding: 10px 0 10px 12px;
+      background: #fbfcfe;
+      border-radius: 6px;
+    }
+
+    .mini-stat:nth-child(2) {
+      border-color: var(--blue);
+    }
+
+    .mini-stat:nth-child(3) {
+      border-color: var(--gold);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 1.25rem;
+      line-height: 1.15;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 18px 0;
+      padding: 10px;
+      background: rgba(245, 247, 251, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav a {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 6px;
+      padding: 7px 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 720;
+    }
+
+    .nav a:hover,
+    .nav a:focus {
+      background: #e8eef7;
+      color: var(--ink);
+      outline: none;
+    }
+
+    section {
+      scroll-margin-top: 84px;
+      margin-top: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .question-card,
+    .practice-card,
+    .summary-card {
+      padding: 22px;
+    }
+
+    .question-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .question-title {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .number {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e8f4f1;
+      color: var(--teal);
+      font-size: 0.86rem;
+      font-weight: 850;
+    }
+
+    .pill {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--muted);
+      font-size: 0.79rem;
+      font-weight: 760;
+      background: #fff;
+    }
+
+    .what-tested {
+      border-left: 4px solid var(--blue);
+      background: #f5f8fc;
+      border-radius: 6px;
+      padding: 12px;
+      color: #253348;
+      font-weight: 720;
+    }
+
+    .answer {
+      border-left: 4px solid var(--green);
+      background: #f3faf6;
+      border-radius: 6px;
+      padding: 14px;
+    }
+
+    .avoid {
+      border-left: 4px solid var(--red);
+      background: #fff6f6;
+      border-radius: 6px;
+      padding: 12px;
+      color: #403030;
+    }
+
+    .note {
+      border-left: 4px solid var(--gold);
+      background: #fffaf0;
+      border-radius: 6px;
+      padding: 12px;
+      color: #403322;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    code,
+    pre {
+      font-family: var(--mono);
+    }
+
+    pre {
+      margin: 0;
+      overflow-x: auto;
+      color: #e8eef5;
+      background: #20242c;
+      border-radius: 6px;
+      padding: 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .inline-code {
+      font-family: var(--mono);
+      background: #eef2f7;
+      border: 1px solid #dde4ee;
+      border-radius: 4px;
+      padding: 1px 5px;
+      white-space: nowrap;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        padding: 18px 12px 42px;
+      }
+
+      h1 {
+        font-size: 2.15rem;
+      }
+
+      .nav {
+        position: static;
+      }
+
+      .button,
+      .nav a {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .nav,
+      .button-row {
+        display: none;
+      }
+
+      .hero,
+      .question-card,
+      .practice-card,
+      .summary-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Previous round replay</div>
+        <h1>Questions they already asked, with stronger practice answers</h1>
+        <p class="hero-copy">
+          This page converts the first interview into a preparation sheet. Practice these out loud so the
+          onsite answer sounds steady, specific, and production-ready.
+        </p>
+        <div class="button-row">
+          <a class="button primary" href="#technical">Start Technical Review</a>
+          <a class="button" href="conduent-interview-prep.html">Back To Main Prep</a>
+          <button class="button" type="button" onclick="window.print()">Print Questions</button>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="Practice focus">
+        <div class="mini-stat">
+          <strong>Actual prompts</strong>
+          <span>Based on the questions from your first Conduent round</span>
+        </div>
+        <div class="mini-stat">
+          <strong>Better wording</strong>
+          <span>Shorter, safer, more manager-friendly answers</span>
+        </div>
+        <div class="mini-stat">
+          <strong>Onsite ready</strong>
+          <span>Technical depth plus communication and ownership</span>
+        </div>
+      </aside>
+    </header>
+
+    <nav class="nav" aria-label="Question categories">
+      <a href="#screening">Screening</a>
+      <a href="#technical">Technical</a>
+      <a href="#data">Data/SQL</a>
+      <a href="#ai">AI/RAG</a>
+      <a href="#behavioral">Behavioral</a>
+      <a href="#closing">Closing</a>
+    </nav>
+
+    <section id="screening" class="grid">
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">1</span>Are you authorized to work in the United States without sponsorship?</h3>
+          <div class="tag-row">
+            <span class="pill">Work authorization</span>
+            <span class="pill">HR screening</span>
+          </div>
+        </div>
+        <div class="what-tested">They are checking risk, timing, and whether HR can hire you cleanly.</div>
+        <div class="answer">
+          Yes, I am currently legally authorized to work in the United States on STEM OPT EAD, valid until
+          January 2027. My H-1B was selected through another employer, and I can provide documentation for
+          my current authorization. For any H-1B transfer or sponsorship details, I would work directly
+          with HR and immigration counsel so everything is handled correctly.
+        </div>
+        <div class="avoid">
+          Avoid over-explaining family connections, fee rules, or promising immigration steps too casually.
+          Keep it factual and let HR handle the legal process.
+        </div>
+      </article>
+
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">2</span>Where are you currently located?</h3>
+          <div class="tag-row">
+            <span class="pill">Location</span>
+            <span class="pill">Onsite readiness</span>
+          </div>
+        </div>
+        <div class="what-tested">They are checking whether New Jersey/Somerset onsite expectations are realistic.</div>
+        <div class="answer">
+          I am currently located in New Jersey. My current role is remote, but I am comfortable attending
+          onsite interviews and I understand this Conduent role is connected to the Somerset, New Jersey
+          location. If the role requires hybrid or onsite presence, I am open to discussing that schedule.
+        </div>
+        <div class="note">
+          If they mention Atlanta or old resume details, calmly clarify: "My current location is New Jersey;
+          any Atlanta reference is related to prior work/project context, not my current location."
+        </div>
+      </article>
+    </section>
+
+    <section id="technical" class="grid">
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">3</span>If Kubernetes has a problem, what commands would you use?</h3>
+          <div class="tag-row">
+            <span class="pill">Kubernetes</span>
+            <span class="pill">Troubleshooting</span>
+          </div>
+        </div>
+        <div class="what-tested">They want to know whether you understand the troubleshooting flow, even if your current environment is mostly VM/Azure based.</div>
+        <div class="answer">
+          I would first identify whether the issue is with one pod, one deployment, one namespace, or the
+          wider cluster. Then I would check pod status, describe output, logs, previous crash logs, events,
+          resources, services, endpoints, and rollout history.
+        </div>
+        <pre><code>kubectl get pods -n &lt;namespace&gt; -o wide
+kubectl describe pod &lt;pod&gt; -n &lt;namespace&gt;
+kubectl logs &lt;pod&gt; -n &lt;namespace&gt;
+kubectl logs &lt;pod&gt; -n &lt;namespace&gt; --previous
+kubectl get events -n &lt;namespace&gt; --sort-by=.lastTimestamp
+kubectl top pods -n &lt;namespace&gt;
+kubectl get svc,endpoints,ingress -n &lt;namespace&gt;
+kubectl rollout history deployment/&lt;deployment&gt; -n &lt;namespace&gt;</code></pre>
+        <div class="note">
+          Good honesty line: "My current production work is more VM/Azure based, but I understand the
+          Kubernetes troubleshooting path and I have been preparing specifically around pods, deployments,
+          services, Helm, events, and rollbacks."
+        </div>
+      </article>
+
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">4</span>An API is returning HTTP 500. How would you troubleshoot?</h3>
+          <div class="tag-row">
+            <span class="pill">API</span>
+            <span class="pill">Tomcat/logs</span>
+          </div>
+        </div>
+        <div class="what-tested">They are checking whether you can move from symptom to evidence instead of guessing.</div>
+        <div class="answer">
+          I would collect the endpoint, timestamp, request payload, user/account, correlation ID, and error
+          frequency. Then I would check application/Tomcat logs around that timestamp, compare failed and
+          successful requests, verify database and downstream dependencies, and check recent deployments
+          or config changes. If there is customer impact, I would communicate status while working toward
+          mitigation and then document RCA.
+        </div>
+        <ol>
+          <li>Confirm scope: one user, one payload, one API, or all traffic.</li>
+          <li>Check stack traces, exception messages, and correlation IDs.</li>
+          <li>Validate DB queries, connection pool, credentials, timeout, CPU, memory, and disk.</li>
+          <li>Check recent release/config changes.</li>
+          <li>Mitigate, validate, communicate, and document.</li>
+        </ol>
+      </article>
+
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">5</span>How many incidents do you handle weekly or monthly?</h3>
+          <div class="tag-row">
+            <span class="pill">Volume</span>
+            <span class="pill">Ownership</span>
+          </div>
+        </div>
+        <div class="what-tested">They want production exposure, but also maturity. High volume is good; sounding uncontrolled is not.</div>
+        <div class="answer">
+          I have handled high incident volume in production support, including hundreds of tickets over
+          the year across UI, application, and data-related issues. On a busy week, the team may see a high
+          number of incidents, and I often help with triage, analysis, ticket notes, and follow-up even
+          when the ticket is not directly assigned to me. I have also learned to balance ownership with
+          good handoffs so the team can scale.
+        </div>
+        <div class="avoid">
+          Avoid saying "my manager was mad/scolded me." Say "my manager coached me to balance ownership
+          and handoffs across the team."
+        </div>
+      </article>
+
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">6</span>How would you process a file with 5 million records in Python?</h3>
+          <div class="tag-row">
+            <span class="pill">Python</span>
+            <span class="pill">Large files</span>
+          </div>
+        </div>
+        <div class="what-tested">They are testing memory awareness, batching, error handling, and restartability.</div>
+        <div class="answer">
+          I would avoid loading the entire file into memory. I would stream the file line by line or process
+          it in chunks, validate each record, write rejected rows separately, process database/API writes
+          in batches, and add checkpointing so the job can restart from the last successful batch.
+        </div>
+        <pre><code>import csv
+
+batch = []
+batch_size = 5000
+
+with open("transactions.csv", newline="", encoding="utf-8") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        batch.append(transform(row))
+
+        if len(batch) == batch_size:
+            process_batch(batch)
+            batch.clear()
+
+if batch:
+    process_batch(batch)</code></pre>
+      </article>
+    </section>
+
+    <section id="data" class="grid">
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">7</span>Write a query to find users with more than three failed transactions.</h3>
+          <div class="tag-row">
+            <span class="pill">SQL</span>
+            <span class="pill">Aggregation</span>
+          </div>
+        </div>
+        <div class="what-tested">They are checking basic SQL correctness: WHERE, GROUP BY, HAVING.</div>
+        <pre><code>SELECT user_id, COUNT(*) AS failure_count
+FROM transaction_history
+WHERE status = 'FAILED'
+GROUP BY user_id
+HAVING COUNT(*) &gt; 3;</code></pre>
+        <div class="answer">
+          If the table is large, I would usually add a date range so the query only scans the relevant
+          operational window.
+        </div>
+        <pre><code>SELECT user_id, COUNT(*) AS failure_count
+FROM transaction_history
+WHERE status = 'FAILED'
+  AND transaction_date &gt;= :start_date
+  AND transaction_date &lt; :end_date
+GROUP BY user_id
+HAVING COUNT(*) &gt; 3;</code></pre>
+      </article>
+
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">8</span>Do you need an index? How do you use it in code?</h3>
+          <div class="tag-row">
+            <span class="pill">Indexing</span>
+            <span class="pill">Optimizer</span>
+          </div>
+        </div>
+        <div class="what-tested">They are checking whether you know indexes are database structures chosen by the optimizer, not usually called directly in application code.</div>
+        <div class="answer">
+          If the query frequently filters by status and transaction date and groups by user ID, I would
+          consider a composite index based on the actual query pattern, for example status, transaction
+          date, and user ID. In normal application code, I do not call the index directly. I write selective
+          predicates, avoid functions on indexed columns when possible, keep statistics updated, and verify
+          with the execution plan that the optimizer uses the right access path.
+        </div>
+        <pre><code>-- Example only; final order depends on selectivity and query patterns.
+CREATE INDEX idx_txn_status_date_user
+ON transaction_history (status, transaction_date, user_id);</code></pre>
+      </article>
+
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">9</span>If the table has 4 years of data, how would you optimize it?</h3>
+          <div class="tag-row">
+            <span class="pill">Oracle/MySQL</span>
+            <span class="pill">Performance</span>
+          </div>
+        </div>
+        <div class="what-tested">They want table-level thinking: indexing, partitioning, archival, statistics, and query design.</div>
+        <div class="answer">
+          I would first check the execution plan and query pattern. For a transaction table with years of
+          data, I would consider date-based partitioning, such as monthly or quarterly partitions, so
+          recent operational queries can prune older partitions. I would also archive old data if the
+          business does not need it in the hot table, maintain the right indexes, refresh statistics, and
+          avoid unnecessary columns or unbounded date searches.
+        </div>
+        <ul>
+          <li>Use date filters in queries.</li>
+          <li>Partition by transaction date when the table is very large.</li>
+          <li>Archive historical data based on retention policy.</li>
+          <li>Use composite indexes for common access patterns.</li>
+          <li>Review execution plans before and after tuning.</li>
+        </ul>
+      </article>
+
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">10</span>You mentioned Power BI with Oracle/SQL source data. How did you make the report efficient?</h3>
+          <div class="tag-row">
+            <span class="pill">Power BI</span>
+            <span class="pill">Reporting</span>
+          </div>
+        </div>
+        <div class="what-tested">They are checking whether you understand data model performance, not just report visuals.</div>
+        <div class="answer">
+          I would keep the report efficient by importing only the required columns, filtering source data
+          early, using proper relationships, avoiding unnecessary calculated columns, and pushing heavy
+          transformations closer to the database when possible. I would also use date filters, incremental
+          refresh where applicable, and validate slow visuals by checking which query or measure is causing
+          the delay.
+        </div>
+        <div class="note">
+          If asked for Oracle version and you do not know, say: "I do not want to guess the exact version,
+          but I can confirm it from the environment or connection details."
+        </div>
+      </article>
+    </section>
+
+    <section id="ai" class="grid">
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">11</span>You have AI automation experience. What model/tools did you use, what were inputs/outputs, and how did you validate accuracy?</h3>
+          <div class="tag-row">
+            <span class="pill">AI operations</span>
+            <span class="pill">Validation</span>
+          </div>
+        </div>
+        <div class="what-tested">They want a concrete project, not just "I used ChatGPT."</div>
+        <div class="answer">
+          One example is an AI-assisted support workflow for summarizing tickets and logs. The inputs were
+          incident description, error messages, timestamps, application logs, and existing runbook content.
+          The output was a structured draft with incident summary, probable cause, impacted component,
+          recommended next checks, and a draft ticket note. I validated it by comparing the AI output with
+          the original logs and final engineer RCA, checking whether the summary cited real evidence, and
+          keeping human review before using it in production communication.
+        </div>
+        <ul>
+          <li>Inputs: tickets, logs, alerts, runbooks, historical incidents.</li>
+          <li>Outputs: summary, probable cause, next steps, ticket notes, runbook draft.</li>
+          <li>Validation: source evidence, engineer review, final RCA comparison, accuracy tracking.</li>
+        </ul>
+      </article>
+
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">12</span>How do you prevent hallucination in AI outputs?</h3>
+          <div class="tag-row">
+            <span class="pill">Responsible AI</span>
+            <span class="pill">RAG</span>
+          </div>
+        </div>
+        <div class="what-tested">This is a key recovery point from the first interview. Answer crisply.</div>
+        <div class="answer">
+          I reduce hallucination by grounding the model with approved source data such as logs, runbooks,
+          knowledge base articles, and ticket history. I ask the model to cite evidence, return structured
+          output, and say "not enough information" when the evidence is missing. For production actions or
+          customer-facing RCA, I keep human review and validation against source systems.
+        </div>
+        <div class="avoid">
+          Do not say anything like "give the model sleep time." Say "grounding, evidence, source citations,
+          structured output, and human review."
+        </div>
+      </article>
+
+      <article class="question-card full">
+        <div>
+          <h3 class="question-title"><span class="number">13</span>What is RAG and how would you use it for IT operations?</h3>
+          <div class="tag-row">
+            <span class="pill">RAG</span>
+            <span class="pill">AIOps</span>
+          </div>
+        </div>
+        <div class="answer">
+          RAG means Retrieval-Augmented Generation. Instead of asking the AI to answer from general memory,
+          the system first retrieves relevant internal documents, tickets, runbooks, logs, or known-error
+          articles. Then the model generates an answer using that retrieved context. In IT operations, I
+          would use RAG for ticket triage, finding similar incidents, summarizing logs, recommending runbook
+          steps, alert correlation, and drafting RCA notes with references.
+        </div>
+        <pre><code>Incident text/logs -&gt; retrieve similar tickets/runbooks -&gt; LLM summary
+                 -&gt; probable cause + next checks + evidence links
+                 -&gt; engineer validation before production action</code></pre>
+      </article>
+    </section>
+
+    <section id="behavioral" class="grid">
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">14</span>Give me a recent incident. What was your role and how did you communicate?</h3>
+          <div class="tag-row">
+            <span class="pill">STAR</span>
+            <span class="pill">Client/internal communication</span>
+          </div>
+        </div>
+        <div class="what-tested">They want a real support story with ownership and communication.</div>
+        <div class="answer">
+          In my current production support role, we had an issue where a group of transaction/API requests
+          started failing. My task was to triage the incident, identify whether it was application, data, or
+          dependency related, and keep the internal team updated. I collected the timestamp, request details,
+          and error messages, checked logs and database records, compared failed and successful transactions,
+          and documented my findings in the ticket. I provided concise status updates and escalated with
+          evidence when another team was needed. The issue was isolated, processing was restored, and I
+          documented the RCA and prevention notes for future incidents.
+        </div>
+      </article>
+
+      <article class="question-card">
+        <div>
+          <h3 class="question-title"><span class="number">15</span>Do you play chess? Have you heard of en passant?</h3>
+          <div class="tag-row">
+            <span class="pill">Culture fit</span>
+            <span class="pill">Conversation</span>
+          </div>
+        </div>
+        <div class="what-tested">This is likely rapport, curiosity, and how you handle unexpected conversation.</div>
+        <div class="answer">
+          Yes, I play chess and I know en passant. It is a special pawn capture where a pawn that advances
+          two squares can be captured by an opposing pawn as if it had moved only one square, but only
+          immediately on the next move. I like chess because it trains calculation, patience, and decision
+          making under pressure, which also connects well with production support.
+        </div>
+        <div class="note">
+          If they ask a puzzle, pause and reason out loud. It is okay to say, "Let me think through the
+          constraints first."
+        </div>
+      </article>
+    </section>
+
+    <section id="closing" class="grid">
+      <article class="practice-card">
+        <h2>Best closing answer</h2>
+        <p>
+          If they ask why you are interested, say this with energy but keep it grounded:
+        </p>
+        <div class="answer">
+          I am interested because this role is very close to the work I want to grow in: production support,
+          databases, Tomcat, Kubernetes, monitoring, and AI-assisted operations. I have hands-on support
+          experience and I am honest that some areas, like Kubernetes at enterprise depth, are areas where I
+          am actively strengthening. What I bring is strong ownership, fast learning, calm incident handling,
+          and a practical automation mindset.
+        </div>
+      </article>
+
+      <article class="practice-card">
+        <h2>Questions you can ask them</h2>
+        <ul>
+          <li>What are the most common production incidents this team handles?</li>
+          <li>Which technologies are most active day to day: Oracle, MySQL, Tomcat, Kubernetes, or cloud?</li>
+          <li>What monitoring tools does the team currently use?</li>
+          <li>What would success look like in the first 90 days?</li>
+          <li>Are there automation or AIOps initiatives the new hire would support?</li>
+        </ul>
+      </article>
+
+      <article class="summary-card full">
+        <h2>Small wording upgrades to remember</h2>
+        <ul>
+          <li>Say "I validated using logs, database evidence, and ticket history" instead of "I guessed the issue."</li>
+          <li>Say "I was coached to improve handoffs" instead of "my manager scolded me."</li>
+          <li>Say "I do not want to guess the exact version" if you do not know a version number.</li>
+          <li>Say "I would roll back first if production impact is high" for failed releases.</li>
+          <li>Say "AI output is a draft until validated against source evidence" for AI governance.</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer class="footer">
+      Previous Conduent interview question replay for Kamalaprasad Natarajan.
+    </footer>
+  </main>
+</body>
+</html>
